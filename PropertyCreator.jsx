@@ -1,12 +1,12 @@
 var React = require('react');
 
 /**
- * Component to add attributes to a Hash or Array.
+ * Component to add properties to a Hash or Array.
  * @param  {FreezerNode} root The parent to add the attribute.
  * @param  {string} attrkey Optional. If provided, the attribute added will have that key (arrays).
  *                           Otherwise an input will be shown to let the user define the key.
  */
-var AttributeCreator = React.createClass({
+var PropertyCreator = React.createClass({
 	getInitialState: function(){
 		return {
 			creating: this.props.creating || false,
@@ -37,18 +37,18 @@ var AttributeCreator = React.createClass({
 		}
 
 		return (
-			<div className="hashAttribute">
+			<div className="hashProperty">
 				{ attrName }
 				<select value={this.state.type} onChange={ this.changeType } ref="typeSelector">
 					{options}
 				</select>
-				<button onClick={ this.createAttribute }>OK</button>
+				<button onClick={ this.createProperty }>OK</button>
 				<a href="#" className="cancelAttr" onClick={ this.handleCancel }>Cancel</a>
 			</div>
 		);
 	},
 
-	componentDidUpdate: function( prevProps, prevState){
+	componentDidUpdate: function( prevProps, prevState ){
 		if( !prevState.creating && this.state.creating ){
 			if( this.refs.keyInput )
 				this.refs.keyInput.getDOMNode().focus();
@@ -79,7 +79,7 @@ var AttributeCreator = React.createClass({
 		this.setState({attrkey: e.target.value});
 	},
 
-	createAttribute: function(){
+	createProperty: function(){
 		var typeManager = require('./typeManager');
 
 		this.setState({creating: false});
@@ -95,4 +95,4 @@ var AttributeCreator = React.createClass({
 	}
 });
 
-module.exports = AttributeCreator;
+module.exports = PropertyCreator;

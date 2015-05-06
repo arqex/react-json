@@ -1,21 +1,21 @@
 'use strict';
 
 var React = require('react'),
-	ObjectAttribute = require('./types/ObjectAttribute'),
-	ArrayAttribute = require('./types/ArrayAttribute'),
-	StringAttribute = require('./types/StringAttribute'),
-	BooleanAttribute = require('./types/BooleanAttribute'),
-	NumberAttribute = require('./types/NumberAttribute')
+	ObjectProperty = require('./types/ObjectProperty'),
+	ArrayProperty = require('./types/ArrayProperty'),
+	StringProperty = require('./types/StringProperty'),
+	BooleanProperty = require('./types/BooleanProperty'),
+	NumberProperty = require('./types/NumberProperty')
 ;
 
 module.exports = {
 
 	components: {
-		boolean: BooleanAttribute,
-		number: NumberAttribute,
-		array: ArrayAttribute,
-		string: StringAttribute,
-		object: ObjectAttribute
+		boolean: BooleanProperty,
+		number: NumberProperty,
+		array: ArrayProperty,
+		string: StringProperty,
+		object: ObjectProperty
 	},
 
 	typeCheckOrder: [ 'boolean', 'number', 'string', 'array' ],
@@ -37,12 +37,12 @@ module.exports = {
 		return type || 'object';
 	},
 
-	guessAttribute: function( value, options, key, updateHandler ){
+	guessProperty: function( value, options, key, updateHandler ){
 		console.log( value );
-		return this.createAttribute( this.guessType( value ), value, {}, key, updateHandler );
+		return this.createProperty( this.guessType( value ), value, {}, key, updateHandler );
 	},
 
-	createAttribute: function( type, value, options, key, updateHandler ){
+	createProperty: function( type, value, options, key, updateHandler ){
 		return React.createElement( this.components[ type ], {
 			value: value,
 			attrkey: typeof key != 'undefined' ? key : '',

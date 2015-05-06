@@ -1,6 +1,6 @@
 var React = require('react'),
-	Attribute = require('../Attribute'),
-	AttributeCreator = require('../AttributeCreator')
+	Property = require('../Property'),
+	PropertyCreator = require('../PropertyCreator')
 ;
 
 /**
@@ -8,7 +8,7 @@ var React = require('react'),
  * @param  {FreezerNode} value The value of the object.
  * @param  {Mixed} original The value of the component it the original json.
  */
-var ObjectAttribute = React.createClass({
+var ObjectProperty = React.createClass({
 	getInitialState: function(){
 		return { editing: false };
 	},
@@ -24,18 +24,18 @@ var ObjectAttribute = React.createClass({
 		var attrs = [];
 		for( var attr in this.props.value ){
 			attrs.push(
-				<Attribute
+				<Property
 					value={this.props.value[attr]}
 					key={ attr }
 					attrkey={ attr }
-					onUpdated={ this.updateAttribute }
-					onDeleted = { this.deleteAttribute } />
+					onUpdated={ this.updateProperty }
+					onDeleted = { this.deleteProperty } />
 			);
 		}
 
 		openHash = (<div className="attrChildren">
 			{ attrs }
-			<AttributeCreator type="attribute" onCreate={ this.createAttribute } />
+			<PropertyCreator type="attribute" onCreate={ this.createProperty } />
 		</div>);
 
 		return (<span className={ className }>
@@ -49,21 +49,21 @@ var ObjectAttribute = React.createClass({
 		this.setState({ editing: !this.state.editing });
 	},
 
-	updateAttribute: function( key, value ){
+	updateProperty: function( key, value ){
 		this.props.value.set( key, value );
 	},
 
-	deleteAttribute: function( key ){
+	deleteProperty: function( key ){
 		this.props.value.remove( key );
 	},
 
-	createAttribute: function( key, value, definition ){
+	createProperty: function( key, value, definition ){
 
 		if( this.props.value[ key ] )
-			return console.log( 'Attribute ' + key + 'already exists.');
+			return console.log( 'Property ' + key + 'already exists.');
 
 		this.props.value.set( key, value );
 	}
 });
 
-module.exports = ObjectAttribute;
+module.exports = ObjectProperty;

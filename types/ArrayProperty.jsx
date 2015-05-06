@@ -1,6 +1,6 @@
 var React = require('react'),
-	Attribute = require('../Attribute'),
-	AttributeCreator = require('../AttributeCreator')
+	Property = require('../Property'),
+	PropertyCreator = require('../PropertyCreator')
 ;
 
 /**
@@ -8,7 +8,7 @@ var React = require('react'),
  * @param  {FreezerNode} value The value of the array.
  * @param  {Mixed} original The value of the component it the original json.
  */
-var ArrayAttribute = React.createClass({
+var ArrayProperty = React.createClass({
 	getInitialState: function(){
 		return { editing: false };
 	},
@@ -24,18 +24,18 @@ var ArrayAttribute = React.createClass({
 		var attrs = [];
 		for (var i = 0; i < this.props.value.length; i++) {
 			attrs.push(
-				<Attribute
+				<Property
 					value={this.props.value[i]}
 					key={ i }
 					attrkey={ i }
-					onUpdated={ this.updateAttribute }
-					onDeleted = { this.deleteAttribute } />
+					onUpdated={ this.updateProperty }
+					onDeleted = { this.deleteProperty } />
 			);
 		}
 
 		openArray = (<div className="attrChildren">
 			{ attrs }
-			<AttributeCreator type="element" parent={ this.props.value } attrkey={ keys.length } onCreate={ this.createAttribute }/>
+			<PropertyCreator type="element" parent={ this.props.value } attrkey={ keys.length } onCreate={ this.createProperty }/>
 			</div>
 		);
 
@@ -49,11 +49,11 @@ var ArrayAttribute = React.createClass({
 		this.setState({editing: !this.state.editing});
 	},
 
-	updateAttribute: function( key, value ){
+	updateProperty: function( key, value ){
 		this.props.value.set( key, value );
 	},
 
-	deleteAttribute: function( key ){
+	deleteProperty: function( key ){
 		this.props.value.splice( key, 1 );
 	},
 
@@ -61,13 +61,13 @@ var ArrayAttribute = React.createClass({
 		return value && value.constructor == Array;
 	},
 
-	createAttribute: function( key, value, definition ){
+	createProperty: function( key, value, definition ){
 
 		if( this.props.value[ key ] )
-			return console.log( 'Attribute ' + key + 'already exists.');
+			return console.log( 'Property ' + key + 'already exists.');
 
 		this.props.value.set( key, value );
 	}
 });
 
-module.exports = ArrayAttribute;
+module.exports = ArrayProperty;

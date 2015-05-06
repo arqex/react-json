@@ -40,7 +40,7 @@ var Json = React.createClass({
 	},
 
 	render: function(){
-		var ob = typeManager.createAttribute('object', this.state.doc, {});
+		var ob = typeManager.createProperty('object', this.state.doc, {});
 
 		return (
 			<div className="jsonEditor">

@@ -2,24 +2,24 @@ var React = require('react')
 ;
 
 /**
- * Attribute component that represent each Array element or Object property.
+ * Property component that represent each Array element or Object property.
  * @param  {string} attrkey The key of the attribute in the parent.
  * @param  {Mixed} value The value of the attribute.
  * @param {Mixed} original The value of the attibute in the original json to highlight the changes.
  * @param {FreezerNode} parent The parent node to notify attribute updates.
  */
-var Attribute = React.createClass({
+var Property = React.createClass({
 	render: function(){
 		var typeManager = require('./typeManager'),
-			typeAttribute = typeManager.guessAttribute( this.props.value, {}, this.props.attrkey, this.onUpdate ),
-			className = 'hashAttribute'
+			typeProperty = typeManager.guessProperty( this.props.value, {}, this.props.attrkey, this.onUpdate ),
+			className = 'hashProperty'
 		;
 
 		return (
 			<div className={className}>
 				<a href="#" className="attrRemove" onClick={ this.handleRemove }>x</a>
 				<span className="attrName">{this.props.attrkey }:</span>
-				<span className="attrValue">{ typeAttribute }</span>
+				<span className="attrValue">{ typeProperty }</span>
 			</div>
 		);
 	},
@@ -37,4 +37,4 @@ var Attribute = React.createClass({
 	}
 });
 
-module.exports = Attribute;
+module.exports = Property;
