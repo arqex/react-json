@@ -1,0 +1,62 @@
+
+/* JSON Editor */
+.jsonEditor > .objectAttr {
+  float: left;
+}
+
+.jsonEditor * {
+	vertical-align: top;
+}
+
+.modified {
+  font-weight: bold;
+}
+
+.attrChildren {
+  margin-left: 20px;
+  display: none;
+  font-weight: normal;
+  border-left: 1px dotted #ddd;
+}
+.compoundAttr.open > .attrChildren {
+  display: block;
+}
+.hashToggle:before {
+  content: '▸';
+  color: #333;
+  line-height: 1em;
+  margin-right: 3px;
+}
+.open > .hashToggle:before {
+  content: '▾';
+}
+
+.attrName {
+  font-style: italic;
+}
+
+.attrValue {
+  margin-left: 5px;
+}
+
+.attrRemove {
+  visibility: hidden;
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+.hashAttribute:hover > .attrRemove {
+  visibility: visible;
+}
+pre {
+  background: #eee;
+  border: 1px solid #ddd;
+  padding: 5px;
+  float: left;
+  width: 180px;
+  margin: 0 10px 0 0;
+}
+
+.hashToggle, .stringAttr{
+  cursor: pointer;
+}

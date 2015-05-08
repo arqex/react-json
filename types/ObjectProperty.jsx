@@ -11,7 +11,6 @@ var React = require('react'),
  */
 var ObjectProperty = React.createClass({
 	getInitialState: function(){
-
 		return assign( {editing: false}, this.getStateFromOptions( this.props.options ) );
 	},
 
