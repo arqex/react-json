@@ -1,4 +1,5 @@
-var React = require('react')
+var React = require('react'),
+	objectAssign = require('object-assign')
 ;
 
 /**
@@ -9,16 +10,33 @@ var React = require('react')
  * @param {FreezerNode} parent The parent node to notify attribute updates.
  */
 var Property = React.createClass({
+	getDefaultProps: function(){
+		return {
+			definition: {}
+		}
+	},
 	render: function(){
 		var typeManager = require('./typeManager'),
-			typeProperty = typeManager.guessProperty( this.props.value, {}, this.props.attrkey, this.onUpdate ),
-			className = 'hashProperty'
+			definition = this.props.definition || {},
+			typeProperty, options
 		;
 
+		if( definition.type ){
+			// Add the property definitions to the options
+			if( definition.properties )
+				options = objectAssign({properties: definition.properties}, definition.options || {});
+			else
+				options = definition.options;
+
+			typeProperty = typeManager.createProperty( definition.type, this.props.value, options, this.props.attrkey, this.onUpdate );
+		}
+		else
+			typeProperty = typeManager.guessProperty( this.props.value, this.props.attrkey, this.onUpdate )
+
 		return (
-			<div className={className}>
+			<div className="hashProperty">
 				<a href="#" className="attrRemove" onClick={ this.handleRemove }>x</a>
-				<span className="attrName">{this.props.attrkey }:</span>
+				<span className="attrName">{ definition.title || this.props.attrkey }:</span>
 				<span className="attrValue">{ typeProperty }</span>
 			</div>
 		);

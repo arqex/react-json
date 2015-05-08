@@ -10,7 +10,18 @@ var React = require('react'),
  */
 var ObjectProperty = React.createClass({
 	getInitialState: function(){
-		return { editing: false };
+		return {
+			editing: false,
+			options: this.getStateFromOptions( this.props.options )
+		};
+	},
+
+	getStateFromOptions: function( options ){
+		var stateOptions = {
+			properties: options && options.properties || {}
+		};
+
+		return stateOptions;
 	},
 
 	defaultValue: {},
@@ -18,16 +29,21 @@ var ObjectProperty = React.createClass({
 	render: function(){
 		var keys = Object.keys( this.props.value ),
 			className = this.state.editing ? 'open objectAttr compoundAttr' : 'objectAttr compoundAttr',
-			openHash = ''
+			openHash = '',
+			definitions = this.state.options.properties
 		;
 
-		var attrs = [];
+		var attrs = [],
+			definition
+		;
 		for( var attr in this.props.value ){
+			definition = definitions[ attr ] || {};
 			attrs.push(
 				<Property
 					value={this.props.value[attr]}
 					key={ attr }
 					attrkey={ attr }
+					definition={ definition }
 					onUpdated={ this.updateProperty }
 					onDeleted = { this.deleteProperty } />
 			);
@@ -38,8 +54,9 @@ var ObjectProperty = React.createClass({
 			<PropertyCreator type="attribute" onCreate={ this.createProperty } />
 		</div>);
 
+		var header = this.props.options.header || 'Map [' + keys.length + ']';
 		return (<span className={ className }>
-				<span onClick={ this.toggleEditing } className="hashToggle">Map [{ keys.length }]</span>
+				<span onClick={ this.toggleEditing } className="hashToggle">{ header }</span>
 				{openHash}
 			</span>)
 		;

@@ -1,0 +1,27 @@
+{
+  "name": "json-form",
+  "version": "0.0.1",
+  "description": "A JSON editor packed as a React.js component. The easiest way of create web forms.",
+  "main": "Json.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arqex/json-form.git"
+  },
+  "keywords": [
+    "react",
+    "forms",
+    "json"
+  ],
+  "author": "Javier Marquez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arqex/json-form/issues"
+  },
+  "homepage": "https://github.com/arqex/json-form",
+  "dependencies": {
+    "object-assign": "^2.0.0"
+  }
+}

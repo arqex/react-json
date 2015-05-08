@@ -16,6 +16,13 @@ JSX components
  */
 var Json = React.createClass({
 
+	getDefaultProps: function(){
+		return {
+			doc: {},
+			definition: {}
+		};
+	},
+
 	componentWillMount: function(){
 		var me = this,
 			doc = this.props.doc,
@@ -26,7 +33,7 @@ var Json = React.createClass({
 		if( !doc.getListener )
 			doc = new Freezer( doc ).get();
 
-
+		// Listen to changes
 		doc.getListener().on('update', function( updated ){
 			me.setState({doc: updated});
 		});
@@ -40,7 +47,11 @@ var Json = React.createClass({
 	},
 
 	render: function(){
-		var ob = typeManager.createProperty('object', this.state.doc, {});
+		var ob = typeManager.createProperty(
+			'object',
+			this.state.doc,
+			{properties: this.props.definition.properties }
+		);
 
 		return (
 			<div className="jsonEditor">
