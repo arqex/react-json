@@ -1,6 +1,7 @@
 var React = require('react'),
 	Property = require('../Property'),
-	PropertyCreator = require('../PropertyCreator')
+	PropertyCreator = require('../PropertyCreator'),
+	assign = require('object-assign')
 ;
 
 /**
@@ -10,18 +11,22 @@ var React = require('react'),
  */
 var ObjectProperty = React.createClass({
 	getInitialState: function(){
-		return {
-			editing: false,
-			options: this.getStateFromOptions( this.props.options )
-		};
+
+		return assign( {editing: false}, this.getStateFromOptions( this.props.options ) );
 	},
 
 	getStateFromOptions: function( options ){
-		var stateOptions = {
-			properties: options && options.properties || {}
-		};
+		var ops = assign( {}, options || {}),
+			state = {
+				properties: ops.properties || {}
+			}
+		;
 
-		return stateOptions;
+		delete ops.properties;
+
+		state.options = ops;
+
+		return state;
 	},
 
 	defaultValue: {},
@@ -30,7 +35,7 @@ var ObjectProperty = React.createClass({
 		var keys = Object.keys( this.props.value ),
 			className = this.state.editing ? 'open objectAttr compoundAttr' : 'objectAttr compoundAttr',
 			openHash = '',
-			definitions = this.state.options.properties
+			definitions = this.state.properties
 		;
 
 		var attrs = [],
@@ -79,6 +84,13 @@ var ObjectProperty = React.createClass({
 		if( this.props.value[ key ] )
 			return console.log( 'Property ' + key + 'already exists.');
 
+		// Start editing
+		definition.editing = true;
+
+		var properties = assign( {}, this.state.properties );
+		properties[ key ] = definition;
+
+		this.setState({properties: properties});
 		this.props.value.set( key, value );
 	}
 });

@@ -5,7 +5,8 @@ var React = require('react'),
 	ArrayProperty = require('./types/ArrayProperty'),
 	StringProperty = require('./types/StringProperty'),
 	BooleanProperty = require('./types/BooleanProperty'),
-	NumberProperty = require('./types/NumberProperty')
+	NumberProperty = require('./types/NumberProperty'),
+	TextProperty = require('./types/TextProperty')
 ;
 
 module.exports = {
@@ -15,10 +16,11 @@ module.exports = {
 		number: NumberProperty,
 		array: ArrayProperty,
 		string: StringProperty,
-		object: ObjectProperty
+		object: ObjectProperty,
+		text: TextProperty
 	},
 
-	typeCheckOrder: [ 'boolean', 'number', 'string', 'array' ],
+	typeCheckOrder: [ 'boolean', 'number', 'text', 'string', 'array' ],
 
 	guessType: function( value ){
 
