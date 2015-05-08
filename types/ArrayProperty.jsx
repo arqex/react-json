@@ -11,12 +11,12 @@ var React = require('react'),
  */
 var ArrayProperty = React.createClass({
 	getInitialState: function(){
-		return assign({ editing: false }, this.getStateFromOptions( this.props.options ) );
+		return this.getStateFromProps( this.props );
 	},
 
-	getStateFromOptions: function( options ){
+	getStateFromProps: function( props ){
 		return {
-			options: options || {},
+			editing: props.options.editing || false,
 			properties: this.state && this.state.properties || {}
 		};
 	},
@@ -74,13 +74,18 @@ var ArrayProperty = React.createClass({
 		return value && value.constructor == Array;
 	},
 
+	componentWillReceiveProps: function( nextProps ){
+		if( this.props.editing != nextProps.editing )
+			this.setState({ editing: nextProps.editing });
+	},
+
 	createProperty: function( key, value, definition ){
 
 		if( this.props.value[ key ] )
 			return console.log( 'Property ' + key + 'already exists.');
 
 		// Start editing
-		definition.editing = true;
+		definition.options = {editing: true};
 
 		var properties = assign( {}, this.state.properties );
 		properties[ key ] = definition;

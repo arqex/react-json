@@ -8,9 +8,13 @@ var React = require('react');
  */
 var TextAttribute = React.createClass({
 	getInitialState: function(){
+		return this.getStateFromProps( this.props );
+	},
+
+	getStateFromProps: function( props ){
 		return {
-			editing: !this.props.value,
-			value: this.props.value
+			editing: props.options.editing || false,
+			value: props.value
 		};
 	},
 
@@ -27,18 +31,18 @@ var TextAttribute = React.createClass({
 
 	componentDidUpdate: function( prevProps, prevState ){
 		if( this.state.editing && ! prevState.editing ){
-			var node = this.refs.input.getDOMNode();
-			node.focus();
-			node.value = node.value;
+			this.focus();
 		}
 	},
 
 	componentDidMount: function(){
-		if( this.state.editing ){
-			var node = this.refs.input.getDOMNode();
-			node.focus();
-			node.value = node.value;
-		}
+		if( this.state.editing )
+			this.focus();
+	},
+
+	componentWillReceiveProps: function( nextProps ){
+		if( this.props.editing != nextProps.editing )
+			this.setState({ editing: nextProps.editing });
 	},
 
 	setEditMode: function(){
@@ -64,6 +68,12 @@ var TextAttribute = React.createClass({
 
 	isType: function( value ){
 		return typeof value == 'string' && value.length > 100;
+	},
+
+	focus: function(){
+		var node = this.refs.input.getDOMNode();
+		node.focus();
+		node.value = node.value;
 	}
 });
 

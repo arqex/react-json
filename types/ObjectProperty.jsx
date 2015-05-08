@@ -11,21 +11,14 @@ var React = require('react'),
  */
 var ObjectProperty = React.createClass({
 	getInitialState: function(){
-		return assign( {editing: false}, this.getStateFromOptions( this.props.options ) );
+		return this.getStateFromProps( this.props );
 	},
 
-	getStateFromOptions: function( options ){
-		var ops = assign( {}, options || {}),
-			state = {
-				properties: ops.properties || {}
-			}
-		;
-
-		delete ops.properties;
-
-		state.options = ops;
-
-		return state;
+	getStateFromProps: function( props ){
+		return {
+			editing: props.options.editing || false,
+			properties: assign({}, props.options && props.options.properties || {})
+		};
 	},
 
 	defaultValue: {},
@@ -66,6 +59,11 @@ var ObjectProperty = React.createClass({
 		;
 	},
 
+	componentWillReceiveProps: function( nextProps ){
+		if( this.props.editing != nextProps.editing )
+			this.setState({ editing: nextProps.editing });
+	},
+
 	toggleEditing: function(){
 		this.setState({ editing: !this.state.editing });
 	},
@@ -84,7 +82,7 @@ var ObjectProperty = React.createClass({
 			return console.log( 'Property ' + key + 'already exists.');
 
 		// Start editing
-		definition.editing = true;
+		definition.options = {editing: true};
 
 		var properties = assign( {}, this.state.properties );
 		properties[ key ] = definition;
