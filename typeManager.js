@@ -39,9 +39,8 @@ module.exports = {
 		return type || 'object';
 	},
 
-	guessProperty: function( value, key, updateHandler ){
-		console.log( value );
-		return this.createProperty( this.guessType( value ), value, {}, key, updateHandler );
+	guessProperty: function( value, key, options, updateHandler ){
+		return this.createProperty( this.guessType( value ), value, options, key, updateHandler );
 	},
 
 	createProperty: function( type, value, options, key, updateHandler ){

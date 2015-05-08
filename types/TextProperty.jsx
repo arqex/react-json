@@ -50,7 +50,8 @@ var TextAttribute = React.createClass({
 	},
 
 	setValue: function(){
-		this.setState({editing: false});
+		if( this.state.editing != 'always' )
+			this.setState({editing: false});
 		this.props.onUpdated( this.state.value );
 	},
 

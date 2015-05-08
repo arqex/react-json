@@ -41,8 +41,8 @@ var NumberAttribute = React.createClass({
 	},
 
 	componentWillReceiveProps: function( nextProps ){
-		if( this.props.editing != nextProps.editing )
-			this.setState({ editing: nextProps.editing });
+		if( this.props.options && this.props.options.editing != nextProps.options.editing )
+			this.setState({ editing: nextProps.options.editing });
 	},
 
 	setEditMode: function(){
@@ -50,7 +50,8 @@ var NumberAttribute = React.createClass({
 	},
 
 	setValue: function(){
-		this.setState({editing: false});
+		if( this.state.editing != 'always' )
+			this.setState({editing: false});
 		this.props.onUpdated( this.state.value );
 	},
 

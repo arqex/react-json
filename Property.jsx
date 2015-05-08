@@ -18,23 +18,28 @@ var Property = React.createClass({
 	render: function(){
 		var typeManager = require('./typeManager'),
 			definition = this.props.definition || {},
-			typeProperty, options
+			className = 'jsonProperty',
+			type,	typeProperty, options
 		;
 
 		if( definition.type ){
+			type = definition.type;
 			// Add the property definitions to the options
 			if( definition.properties )
 				options = objectAssign({properties: definition.properties}, definition.options || {});
 			else
 				options = definition.options;
-
-			typeProperty = typeManager.createProperty( definition.type, this.props.value, options, this.props.attrkey, this.onUpdate );
 		}
-		else
-			typeProperty = typeManager.guessProperty( this.props.value, this.props.attrkey, this.onUpdate )
+		else{
+			type = typeManager.guessType( this.props.value );
+			options = definition.options;
+		}
+
+		typeProperty = typeManager.createProperty( type, this.props.value, options, this.props.attrkey, this.onUpdate );
+		className += ' json_' + type;
 
 		return (
-			<div className="hashProperty">
+			<div className={ className }>
 				<a href="#" className="attrRemove" onClick={ this.handleRemove }>x</a>
 				<span className="attrName">{ definition.title || this.props.attrkey }:</span>
 				<span className="attrValue">{ typeProperty }</span>

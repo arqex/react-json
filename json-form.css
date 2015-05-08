@@ -8,10 +8,6 @@
 	vertical-align: top;
 }
 
-.modified {
-  font-weight: bold;
-}
-
 .attrChildren {
   margin-left: 20px;
   display: none;
@@ -39,6 +35,12 @@
   margin-left: 5px;
 }
 
+.attrValue > input,
+.attrValue > textarea,
+.attrValue > select {
+	margin-bottom: 5px;
+}
+
 .attrRemove {
   visibility: hidden;
   margin-right: 5px;
@@ -59,4 +61,12 @@ pre {
 
 .hashToggle, .stringAttr{
   cursor: pointer;
+}
+
+.json_boolean * {
+	vertical-align: middle;
+}
+
+.json_boolean input{
+	margin-bottom: 0;
 }
