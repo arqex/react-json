@@ -38,13 +38,11 @@ var Property = React.createClass({
 		typeProperty = typeManager.createProperty( type, this.props.value, options, this.props.attrkey, this.onUpdate );
 		className += ' json_' + type;
 
-		return (
-			<div className={ className }>
-				<a href="#" className="attrRemove" onClick={ this.handleRemove }>x</a>
-				<span className="attrName">{ definition.title || this.props.attrkey }:</span>
-				<span className="attrValue">{ typeProperty }</span>
-			</div>
-		);
+		return React.DOM.div({className: className}, [
+			React.DOM.a({href: '#', className: 'attrRemove', onClick: this.handleRemove}, 'x'),
+			React.DOM.span({className: 'attrName'}, (definition.title || this.props.attrkey) + ':' ),
+			React.DOM.span({className: 'attrValue'}, typeProperty )
+		]);
 	},
 
 	handleRemove: function( e ){

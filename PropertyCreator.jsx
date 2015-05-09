@@ -17,10 +17,10 @@ var PropertyCreator = React.createClass({
 
 	render: function(){
 		if( !this.state.creating )
-			return <a href="#" onClick={this.handleCreate}>+ Add {this.props.type}</a>;
+			return React.DOM.a({ href: '#', onClick: this.handleCreate }, '+ Add ' + this.props.type );
 
 		var options = this.getTypes().map( function( type ){
-				return <option value={type} key={type}>{ type[0].toUpperCase() + type.slice(1) }</option>;
+				return React.DOM.option({value: type, key: type}, type[0].toUpperCase() + type.slice(1));
 			}),
 			attrName
 		;
@@ -28,24 +28,20 @@ var PropertyCreator = React.createClass({
 		if( this.props.type == 'null' )
 			attrName = '';
 		else if( typeof this.props.attrkey != 'undefined' )
-			attrName =  <span className="attrName">{this.props.attrkey}:</span>;
+			attrName =  React.DOM.span({className: 'attrName'}, this.props.attrkey);
 		else {
 			attrName = [
-				<input ref="keyInput" type="text" value={this.state.value} onChange={this.changeKey}/>,
-				<span>:</span>
+				React.DOM.input({ref: 'keyInput', type: 'text', value: this.state.value, onChange: this.changeKey}),
+				React.DOM.span(null, ':')
 			];
 		}
 
-		return (
-			<div className="hashProperty">
-				{ attrName }
-				<select value={this.state.type} onChange={ this.changeType } ref="typeSelector">
-					{options}
-				</select>
-				<button onClick={ this.createProperty }>OK</button>
-				<a href="#" className="cancelAttr" onClick={ this.handleCancel }>Cancel</a>
-			</div>
-		);
+		return React.DOM.div( {className: 'jsonProperty'}, [
+			attrName,
+			React.DOM.select({ value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
+			React.DOM.button({ onClick: this.createProperty }, 'OK' ),
+			React.DOM.a({ href: '#', className: 'cancelAttr', onClick: this.handleCancel}, 'Cancel')
+		]);
 	},
 
 	componentDidUpdate: function( prevProps, prevState ){

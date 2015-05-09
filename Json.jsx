@@ -58,11 +58,7 @@ var Json = React.createClass({
 			)
 		;
 
-		return (
-			<div className="jsonEditor">
-				{ ob }
-			</div>
-		);
+		return React.DOM.div({className: "jsonEditor"}, ob);
 	},
 	getValue: function(){
 		return this.state.doc.toJS();

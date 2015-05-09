@@ -24,9 +24,15 @@ var TextAttribute = React.createClass({
 		var className = 'textAttr';
 
 		if( !this.state.editing )
-			return <span onClick={ this.setEditMode } className={ className }>{ this.props.value }</span>;
+			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
 
-		return <textarea value={ this.state.value } onChange={ this.updateValue } onBlur={ this.setValue } ref="input" onKeyDown={this.handleKeyDown} />;
+		return React.DOM.textarea({
+			value: this.state.value,
+			onChange: this.updateValue,
+			onBlur: this.setValue,
+			ref: 'input',
+			onKeyDown: this.handleKeyDown
+		});
 	},
 
 	componentDidUpdate: function( prevProps, prevState ){

@@ -40,28 +40,29 @@ var ArrayProperty = React.createClass({
 			if( typeof definition.options.editing == 'undefined' && this.state.editing == 'always' )
 				definition.options.editing = 'always';
 
-			attrs.push(
-				<Property
-					value={this.props.value[i]}
-					key={ i }
-					attrkey={ i }
-					definition={ definition }
-					onUpdated={ this.updateProperty }
-					onDeleted = { this.deleteProperty } />
-			);
+			attrs.push( React.createElement( Property, {
+				value: this.props.value[i],
+				key: i,
+				attrkey: i,
+				definition: definition,
+				onUpdated: this.updateProperty,
+				onDeleted: this.deleteProperty
+			}));
 		}
 
-		openArray = (<div className="attrChildren">
-			{ attrs }
-			<PropertyCreator type="element" parent={ this.props.value } attrkey={ keys.length } onCreate={ this.createProperty }/>
-			</div>
-		);
+		openArray = React.DOM.div({ className: 'attrChildren'}, [
+			attrs,
+			React.createElement( PropertyCreator, {
+				type: 'element',
+				attrkey: keys.length,
+				onCreate: this.createProperty
+			})
+		]);
 
-		return (<span className={ className }>
-				<span onClick={this.toggleEditing} className="hashToggle">List [{keys.length}]</span>
-				{openArray}
-			</span>)
-		;
+		return React.DOM.span({className: className}, [
+			React.DOM.span({ onClick: this.toggleEditing, className: 'hashToggle' }, 'List [' + keys.length + ']'),
+			openArray
+		]);
 	},
 	toggleEditing: function(){
 		if( this.state.editing != 'always' )

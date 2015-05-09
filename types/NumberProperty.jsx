@@ -24,9 +24,16 @@ var NumberAttribute = React.createClass({
 		var className = 'numberAttr';
 
 		if( !this.state.editing )
-			return <span onClick={ this.setEditMode } className={ className }>{ this.props.value }</span>;
+			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
 
-		return <input type="number" value={ this.state.value } onChange={ this.updateValue } onBlur={ this.setValue } ref="input" onKeyDown={this.handleKeyDown} />;
+		return React.DOM.input({
+			type: 'number',
+			value: this.state.value,
+			onChange: this.updateValue,
+			onBlur: this.setValue,
+			ref: 'input',
+			onKeyDown: this.handleKeyDown
+		});
 	},
 
 	componentDidUpdate: function( prevProps, prevState ){

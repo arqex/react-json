@@ -40,28 +40,29 @@ var ObjectProperty = React.createClass({
 			if( typeof definition.options.editing == 'undefined' && this.state.editing == 'always' )
 				definition.options.editing = 'always';
 
-			attrs.push(
-				<Property
-					value={this.props.value[attr]}
-					key={ attr }
-					attrkey={ attr }
-					definition={ definition }
-					onUpdated={ this.updateProperty }
-					onDeleted = { this.deleteProperty } />
-			);
+			attrs.push( React.createElement( Property, {
+				value: this.props.value[attr],
+				key: attr,
+				attrkey: attr,
+				definition: definition,
+				onUpdated: this.updateProperty,
+				onDeleted: this.deleteProperty
+			}));
 		}
 
-		openHash = (<div className="attrChildren">
-			{ attrs }
-			<PropertyCreator type="attribute" onCreate={ this.createProperty } />
-		</div>);
+		openHash = React.DOM.div({ className: 'attrChildren'}, [
+			attrs,
+			React.createElement( PropertyCreator, {
+				type: 'attribute',
+				onCreate: this.createProperty
+			})
+		]);
 
 		var header = this.props.options.header || 'Map [' + keys.length + ']';
-		return (<span className={ className }>
-				<span onClick={ this.toggleEditing } className="hashToggle">{ header }</span>
-				{openHash}
-			</span>)
-		;
+		return React.DOM.span({className: className}, [
+			React.DOM.span({ onClick: this.toggleEditing, className: 'hashToggle' }, header),
+			openHash
+		]);
 	},
 
 	componentWillReceiveProps: function( nextProps ){
