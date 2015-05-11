@@ -32,7 +32,8 @@ var StringAttribute = React.createClass({
 			onChange: this.updateValue,
 			onBlur: this.setValue,
 			ref: 'input',
-			onKeyDown: this.handleKeyDown
+			onKeyDown: this.handleKeyDown,
+			className: className
 		});
 	},
 

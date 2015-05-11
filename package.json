@@ -4,7 +4,7 @@
   "description": "A JSON editor packed as a React.js component. The easiest way of create web forms.",
   "main": "Json.jsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/mocha/bin/mocha tests"
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,12 @@
   },
   "homepage": "https://github.com/arqex/json-form",
   "dependencies": {
+    "freezer-js": "^0.5.2",
     "object-assign": "^2.0.0"
   },
   "devDependencies": {
-    "jsdom": "^5.3.0"
+    "jsdom": "^3.1.2",
+    "mocha": "^2.2.4",
+    "react": "^0.13.3"
   }
 }
