@@ -25,6 +25,9 @@
     "freezer-js": "^0.5.2",
     "object-assign": "^2.0.0"
   },
+  "peerDependencies": {
+    "react": "^0.13.1"
+  	},
   "devDependencies": {
     "jsdom": "^3.1.2",
     "mocha": "^2.2.4",

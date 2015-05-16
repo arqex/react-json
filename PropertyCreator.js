@@ -1,4 +1,6 @@
-var React = require('react');
+var React = require('react'),
+	TypeProperty = require('./TypeProperty')
+;
 
 /**
  * Component to add properties to a Hash or Array.
@@ -76,18 +78,15 @@ var PropertyCreator = React.createClass({
 	},
 
 	createProperty: function(){
-		var typeManager = require('./typeManager');
-
 		this.setState({creating: false});
 
-		var value = typeManager.components[ this.state.type ].prototype.defaultValue;
+		var value = TypeProperty.prototype.components[ this.state.type ].prototype.defaultValue;
 
 		this.props.onCreate( this.state.attrkey, value, {type: this.state.type });
 	},
 
 	getTypes: function(){
-		var typeManager = require('./typeManager');
-		return Object.keys( typeManager.components );
+		return Object.keys( TypeProperty.prototype.components );
 	}
 });
 

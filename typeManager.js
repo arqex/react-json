@@ -50,5 +50,9 @@ module.exports = {
 			options: options || {},
 			onUpdated: updateHandler
 		});
+	},
+
+	getValidationErrors: function(){
+		return this.refs.property.getValidationErrors();
 	}
 };

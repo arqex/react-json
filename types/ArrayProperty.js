@@ -16,7 +16,7 @@ var ArrayProperty = React.createClass({
 
 	getStateFromProps: function( props ){
 		return {
-			editing: props.options.editing || false,
+			editing: props.settings.editing || false,
 			properties: this.state && this.state.properties || {}
 		};
 	},
@@ -35,10 +35,10 @@ var ArrayProperty = React.createClass({
 		;
 		for (var i = 0; i < this.props.value.length; i++) {
 			definition = definitions[ i ] || {};
-			if( !definition.options )
-				definition.options = {};
-			if( typeof definition.options.editing == 'undefined' && this.state.editing == 'always' )
-				definition.options.editing = 'always';
+			if( !definition.settings )
+				definition.settings = {};
+			if( typeof definition.settings.editing == 'undefined' && this.state.editing == 'always' )
+				definition.settings.editing = 'always';
 
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[i],
@@ -92,7 +92,7 @@ var ArrayProperty = React.createClass({
 			return console.log( 'Property ' + key + 'already exists.');
 
 		// Start editing
-		definition.options = {editing: this.state.editing == 'always' ? 'always' : true };
+		definition.settings = {editing: this.state.editing == 'always' ? 'always' : true };
 
 		var properties = assign( {}, this.state.properties );
 		properties[ key ] = definition;

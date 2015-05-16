@@ -6,14 +6,14 @@ var React = require('react');
  * @param  {Mixed} original The value of the component it the original json.
  * @param {FreezerNode} parent The parent node to let the string component update its value.
  */
-var StringAttribute = React.createClass({
+var TextAttribute = React.createClass({
 	getInitialState: function(){
 		return this.getStateFromProps( this.props );
 	},
 
 	getStateFromProps: function( props ){
 		return {
-			editing: props.options.editing || false,
+			editing: props.settings.editing || false,
 			value: props.value
 		};
 	},
@@ -21,19 +21,17 @@ var StringAttribute = React.createClass({
 	defaultValue: '',
 
 	render: function(){
-		var className = 'stringAttr';
+		var className = 'textAttr';
 
 		if( !this.state.editing )
 			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
 
-		return React.DOM.input({
-			type: 'text',
+		return React.DOM.textarea({
 			value: this.state.value,
 			onChange: this.updateValue,
 			onBlur: this.setValue,
 			ref: 'input',
-			onKeyDown: this.handleKeyDown,
-			className: className
+			onKeyDown: this.handleKeyDown
 		});
 	},
 
@@ -76,7 +74,7 @@ var StringAttribute = React.createClass({
 	},
 
 	isType: function( value ){
-		return typeof value != 'object';
+		return typeof value == 'string' && value.length > 100;
 	},
 
 	focus: function(){
@@ -86,4 +84,4 @@ var StringAttribute = React.createClass({
 	}
 });
 
-module.exports = StringAttribute;
+module.exports = TextAttribute;

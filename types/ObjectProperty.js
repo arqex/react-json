@@ -16,8 +16,8 @@ var ObjectProperty = React.createClass({
 
 	getStateFromProps: function( props ){
 		return {
-			editing: props.options.editing || false,
-			properties: assign({}, props.options && props.options.properties || {})
+			editing: props.settings.editing || false,
+			properties: assign({}, props.settings && props.settings.properties || {})
 		};
 	},
 
@@ -35,15 +35,16 @@ var ObjectProperty = React.createClass({
 		;
 		for( var attr in this.props.value ){
 			definition = definitions[ attr ] || {};
-			if( !definition.options )
-				definition.options = {};
-			if( typeof definition.options.editing == 'undefined' && this.state.editing == 'always' )
-				definition.options.editing = 'always';
+			if( !definition.settings )
+				definition.settings = {};
+			if( typeof definition.settings.editing == 'undefined' && this.state.editing == 'always' )
+				definition.settings.editing = 'always';
 
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[attr],
 				key: attr,
 				attrkey: attr,
+				ref: attr,
 				definition: definition,
 				onUpdated: this.updateProperty,
 				onDeleted: this.deleteProperty
@@ -58,7 +59,7 @@ var ObjectProperty = React.createClass({
 			})
 		]);
 
-		var header = this.props.options.header || 'Map [' + keys.length + ']';
+		var header = this.props.settings.header || 'Map [' + keys.length + ']';
 		return React.DOM.span({className: className}, [
 			React.DOM.span({ onClick: this.toggleEditing, className: 'hashToggle' }, header),
 			openHash
@@ -89,13 +90,28 @@ var ObjectProperty = React.createClass({
 			return console.log( 'Property ' + key + 'already exists.');
 
 		// Start editing
-		definition.options = {editing: this.state.editing == 'always' ? 'always' : true };
+		definition.settings = {editing: this.state.editing == 'always' ? 'always' : true };
 
 		var properties = assign( {}, this.state.properties );
 		properties[ key ] = definition;
 
 		this.setState({properties: properties});
 		this.props.value.set( key, value );
+	},
+
+	getValidationErrors: function( jsonValue ){
+		var me = this,
+			errors = [],
+			attrs = Object.keys( this.refs )
+		;
+
+		attrs.forEach( function( attr ){
+			var error = me.refs[attr].getValidationErrors();
+			if( error )
+				errors = errors.concat( error );
+		});
+
+		return errors;
 	}
 });
 

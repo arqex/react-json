@@ -13,7 +13,7 @@ var NumberAttribute = React.createClass({
 
 	getStateFromProps: function( props ){
 		return {
-			editing: props.options.editing || false,
+			editing: props.settings.editing || false,
 			value: props.value
 		};
 	},
@@ -48,7 +48,7 @@ var NumberAttribute = React.createClass({
 	},
 
 	componentWillReceiveProps: function( nextProps ){
-		if( this.props.options && this.props.options.editing != nextProps.options.editing )
+		if( this.props.settings && this.props.settings.editing != nextProps.options.editing )
 			this.setState({ editing: nextProps.options.editing });
 	},
 

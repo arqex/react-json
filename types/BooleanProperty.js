@@ -11,7 +11,7 @@ var BooleanAttribute = React.createClass({
 	render: function(){
 		var className = 'booleanAttr';
 
-		return <input type="checkbox" checked={ this.props.value } onChange={ this.updateValue } />;
+		return React.DOM.input({type: "checkbox", checked: this.props.value, onChange: this.updateValue });
 	},
 
 	setValue: function(){
