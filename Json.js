@@ -1,12 +1,14 @@
 var React = require('react'),
 	Freezer = require('freezer-js'),
+	objectAssign = require('object-assign'),
 	TypeProperty = require('./TypeProperty'),
 	ObjectProperty = require('./types/ObjectProperty'),
 	ArrayProperty = require('./types/ArrayProperty'),
 	StringProperty = require('./types/StringProperty'),
 	BooleanProperty = require('./types/BooleanProperty'),
 	NumberProperty = require('./types/NumberProperty'),
-	TextProperty = require('./types/TextProperty')
+	TextProperty = require('./types/TextProperty'),
+	deepSettings = require('./deepSettings')
 ;
 
 
@@ -21,6 +23,18 @@ var Json = React.createClass({
 	getDefaultProps: function(){
 		return {
 			doc: {}
+		};
+	},
+
+	childContextTypes: {
+		typeDefaults: React.PropTypes.object,
+		deepSettings: React.PropTypes.object
+	},
+
+	getChildContext: function(){
+		return {
+			typeDefaults: this.state.defaults,
+			deepSettings: this.getDeepSettings()
 		};
 	},
 
@@ -39,12 +53,18 @@ var Json = React.createClass({
 			me.setState({doc: updated});
 		});
 
-		return {doc: doc};
+		return {
+			doc: doc,
+			defaults: this.createDefaults()
+		};
 	},
 
 	componentWillReceiveProps: function( newProps ){
-		if( !newProps.doc.getListener )
+		if( !newProps.doc.getListener ){
 			this.setState({doc: this.state.doc.reset( newProps.doc )});
+		}
+
+		this.setState( {defaults: this.createDefaults()} );
 	},
 
 	render: function(){
@@ -52,12 +72,13 @@ var Json = React.createClass({
 			ob = React.createElement( TypeProperty, {
 				type: 'object',
 				value: this.state.doc,
-				settings: {
+				settings: objectAssign( {}, this.state.defaults.object, {
 					properties: definition.properties,
 					editing: definition.editing,
 					extensible: definition.extensible
-				},
-				ref: 'doc'
+				}),
+				ref: 'doc',
+				defaults: this.state.defaults
 			})
 		;
 
@@ -74,6 +95,27 @@ var Json = React.createClass({
 		;
 
 		return errors.length ? errors : false;
+	},
+	getDeepSettings: function(){
+		var settings = {};
+
+		for( var key in deepSettings ){
+			settings[ key ] = deepSettings[ key ]( this, settings[key] );
+		}
+
+		return settings;
+	},
+	createDefaults: function(){
+		var components = TypeProperty.prototype.components,
+			propDefaults = this.props.definition.defaults || {},
+			defaults = {}
+		;
+
+		for( var type in components ){
+			defaults[ type ] = objectAssign( {}, components[ type ].prototype.defaults || {}, propDefaults[ type ] || {});
+		}
+
+		return defaults;
 	}
 });
 

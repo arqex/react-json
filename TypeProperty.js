@@ -1,6 +1,8 @@
 'use strict';
 
-var React = require('react');
+var React = require('react'),
+	objectAssign = require('object-assign')
+;
 
 var components = {};
 var typeCheckOrder = [];
@@ -9,13 +11,26 @@ var TypeProperty = React.createClass({
 	components: {},
 	typeCheckOrder: [],
 
-	render: function() {
+	contextTypes: {
+		typeDefaults: React.PropTypes.object,
+		deepSettings: React.PropTypes.object
+	},
 
-		var Component = this.getComponent();
+	render: function() {
+		var Component = this.getComponent(),
+			settings = objectAssign(
+				{},
+				this.context.deepSettings,
+				this.context.typeDefaults[ this.props.type ],
+				this.props.settings
+			)
+		;
+
+		console.log( this.context );
 
 		return React.createElement( Component, {
 			value: this.props.value,
-			settings: this.props.settings || {},
+			settings: settings,
 			onUpdated: this.props.onUpdated,
 			ref: 'property'
 		});

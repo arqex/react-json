@@ -14,6 +14,7 @@ var React = require('react'),
  * @param {FreezerNode} parent The parent node to notify attribute updates.
  */
 var Property = React.createClass({
+
 	getInitialState: function(){
 		return {error: false};
 	},
@@ -25,8 +26,8 @@ var Property = React.createClass({
 	render: function(){
 		var definition = this.props.definition || {},
 			className = 'jsonProperty',
-			typeProperty = this.renderTypeProperty(),
 			type = definition.type || TypeProperty.prototype.guessType( this.props.value ),
+			typeProperty = this.renderTypeProperty( type ),
 			error = ''
 		;
 
@@ -45,23 +46,23 @@ var Property = React.createClass({
 		]);
 	},
 
-	renderTypeProperty: function(){
+	renderTypeProperty: function( type ){
 		var definition = this.props.definition || {},
-			settings
+			settings = objectAssign( {}, definition.settings || {} ),
+			component
 		;
 
 		if( definition.properties )
-			settings = objectAssign({properties: definition.properties}, definition.settings || {});
-		else
-			settings = definition.settings;
+			settings.properties = definition.properties;
 
-		return React.createElement( TypeProperty, {
-			type: definition.type,
+		component = React.createElement( TypeProperty, {
+			type: type,
 			value: this.props.value,
 			settings: settings,
 			onUpdated: this.onUpdated,
 			ref: 'typeProperty'
 		});
+		return component;
 	},
 
 	handleRemove: function( e ){

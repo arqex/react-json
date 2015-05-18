@@ -41,7 +41,7 @@ var ArrayProperty = React.createClass({
 			if( !definition.settings )
 				definition.settings = {};
 
-			this.addDeepSettings( definition.settings );
+			//this.addDeepSettings( definition.settings );
 
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[i],
@@ -104,12 +104,6 @@ var ArrayProperty = React.createClass({
 
 		this.setState({properties: properties});
 		this.props.value.set( key, value );
-	},
-
-	addDeepSettings: function( settings ){
-		for( var key in deepSettings ){
-			settings[ key ] = deepSettings[ key ]( this, settings[key] );
-		}
 	}
 });
 

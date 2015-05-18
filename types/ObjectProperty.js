@@ -13,6 +13,7 @@ var React = require('react'),
  * @param  {Mixed} original The value of the component it the original json.
  */
 var ObjectProperty = React.createClass({
+
 	getInitialState: function(){
 		return this.getStateFromProps( this.props );
 	},
@@ -30,18 +31,17 @@ var ObjectProperty = React.createClass({
 		var keys = Object.keys( this.props.value ),
 			className = this.state.editing ? 'open objectAttr compoundAttr' : 'objectAttr compoundAttr',
 			openHash = '',
-			definitions = this.state.properties
-		;
-
-		var attrs = [],
+			definitions = this.state.properties,
+			attrs = [],
 			definition
 		;
+
 		for( var attr in this.props.value ){
 			definition = definitions[ attr ] || {};
 			if( !definition.settings )
 				definition.settings = {};
 
-			this.addDeepSettings( definition.settings );
+			//this.addDeepSettings( definition.settings );
 
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[attr],
@@ -118,12 +118,6 @@ var ObjectProperty = React.createClass({
 		});
 
 		return errors;
-	},
-
-	addDeepSettings: function( settings ){
-		for( var key in deepSettings ){
-			settings[ key ] = deepSettings[ key ]( this, settings[key] );
-		}
 	}
 });
 

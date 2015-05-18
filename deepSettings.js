@@ -3,7 +3,9 @@ module.exports = {
 		if( typeof value != 'undefined' )
 			return value;
 
-		if( instance.state.editing == 'always' )
+		var settings = instance.props.settings || instance.props.definition;
+
+		if( settings.editing == 'always' )
 			return 'always';
 
 		// else return undefined: do not override
