@@ -45,7 +45,7 @@ var ObjectProperty = React.createClass({
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[attr],
 				key: attr,
-				attrkey: attr,
+				name: attr,
 				ref: attr,
 				definition: definition,
 				onUpdated: this.updateProperty,

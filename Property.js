@@ -8,7 +8,7 @@ var React = require('react'),
 
 /**
  * Property component that represent each Array element or Object property.
- * @param  {string} attrkey The key of the attribute in the parent.
+ * @param  {string} name The key of the attribute in the parent.
  * @param  {Mixed} value The value of the attribute.
  * @param {Mixed} original The value of the attibute in the original json to highlight the changes.
  * @param {FreezerNode} parent The parent node to notify attribute updates.
@@ -40,7 +40,7 @@ var Property = React.createClass({
 
 		return React.DOM.div({className: className}, [
 			React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x'),
-			React.DOM.span({ key: 's1', className: 'jsonName'}, (definition.title || this.props.attrkey) + ':' ),
+			React.DOM.span({ key: 's1', className: 'jsonName'}, (definition.title || this.props.name) + ':' ),
 			error,
 			React.DOM.span({key:'s2', className: 'jsonValue'}, typeProperty )
 		]);
@@ -67,7 +67,7 @@ var Property = React.createClass({
 	},
 
 	handleRemove: function( e ){
-		this.props.onDeleted( this.props.attrkey );
+		this.props.onDeleted( this.props.name );
 	},
 
 	shouldComponentUpdate: function( nextProps, nextState ){
@@ -75,13 +75,13 @@ var Property = React.createClass({
 	},
 
 	onUpdated: function( value ){
-		this.props.onUpdated( this.props.attrkey, value );
+		this.props.onUpdated( this.props.name, value );
 	},
 
 	getValidationErrors: function( jsonValue ){
 		var childErrors = [],
 			validates = this.props.definition.validates,
-			attrkey = this.props.attrkey,
+			name = this.props.name,
 			property = this.refs.typeProperty
 		;
 
@@ -89,9 +89,9 @@ var Property = React.createClass({
 			childErrors = property.getValidationErrors( jsonValue );
 			childErrors.forEach( function( error ){
 				if( !error.path )
-					error.path = attrkey;
+					error.path = name;
 				else
-					error.path = attrkey + '.' + error.path;
+					error.path = name + '.' + error.path;
 			});
 		}
 
@@ -105,9 +105,9 @@ var Property = React.createClass({
 		if( error ){
 			message = this.props.definition.errorMessage;
 			if( !message )
-				message = ( this.props.definition.title || this.props.attrkey ) + ' value is not valid.';
+				message = ( this.props.definition.title || this.props.name ) + ' value is not valid.';
 
-			error.path = attrkey;
+			error.path = name;
 			error.message = message;
 			this.setState( {error: message} );
 			childErrors = childErrors.concat( [error] );

@@ -45,7 +45,7 @@ var ArrayProperty = React.createClass({
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[i],
 				key: i,
-				attrkey: i,
+				name: i,
 				definition: definition,
 				onUpdated: this.updateProperty,
 				onDeleted: this.deleteProperty,
@@ -57,7 +57,7 @@ var ArrayProperty = React.createClass({
 		if( this.props.settings.extensible !== false ){
 			openArrayChildren.push( React.createElement( PropertyCreator, {
 					type: 'element',
-					attrkey: keys.length,
+					name: keys.length,
 					onCreate: this.createProperty,
 					key: 'c'
 				})

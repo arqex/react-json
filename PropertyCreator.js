@@ -5,14 +5,14 @@ var React = require('react'),
 /**
  * Component to add properties to a Hash or Array.
  * @param  {FreezerNode} root The parent to add the attribute.
- * @param  {string} attrkey Optional. If provided, the attribute added will have that key (arrays).
+ * @param  {string} name Optional. If provided, the attribute added will have that key (arrays).
  *                           Otherwise an input will be shown to let the user define the key.
  */
 var PropertyCreator = React.createClass({
 	getInitialState: function(){
 		return {
 			creating: this.props.creating || false,
-			attrkey: this.props.attrkey,
+			name: this.props.name,
 			type: 'string'
 		};
 	},
@@ -24,28 +24,28 @@ var PropertyCreator = React.createClass({
 		var options = this.getTypes().map( function( type ){
 				return React.DOM.option({value: type, key: type}, type[0].toUpperCase() + type.slice(1));
 			}),
-			attrName
+			propertyName
 		;
 
 		if( this.props.type == 'null' )
-			attrName = '';
-		else if( typeof this.props.attrkey != 'undefined' )
-			attrName =  [
-				React.DOM.span({className: 'jsonName'}, this.props.attrkey),
+			propertyName = '';
+		else if( typeof this.props.name != 'undefined' )
+			propertyName =  [
+				React.DOM.span({className: 'jsonName'}, this.props.name),
 				React.DOM.span(null, ':')
 			];
 		else {
-			attrName = [
+			propertyName = [
 				React.DOM.input({ref: 'keyInput', type: 'text', value: this.state.value, onChange: this.changeKey}),
 				React.DOM.span(null, ':')
 			];
 		}
 
 		return React.DOM.div( {className: 'jsonProperty jsonPropertyAdder'}, [
-			attrName,
-			React.DOM.select({ value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
-			React.DOM.button({ onClick: this.createProperty }, 'OK' ),
-			React.DOM.a({ href: '#', className: 'cancelProperty', onClick: this.handleCancel}, 'Cancel')
+			propertyName,
+			React.DOM.select({ key: 's', value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
+			React.DOM.button({ key: 'b', onClick: this.createProperty }, 'OK' ),
+			React.DOM.a({ key: 'a', href: '#', className: 'cancelProperty', onClick: this.handleCancel}, 'Cancel')
 		]);
 	},
 
@@ -59,7 +59,7 @@ var PropertyCreator = React.createClass({
 	},
 
 	componentWillReceiveProps: function( newProps ){
-		this.setState({attrkey: newProps.attrkey});
+		this.setState({name: newProps.name});
 	},
 
 	handleCreate: function( e ){
@@ -77,7 +77,7 @@ var PropertyCreator = React.createClass({
 	},
 
 	changeKey: function( e ){
-		this.setState({attrkey: e.target.value});
+		this.setState({name: e.target.value});
 	},
 
 	createProperty: function(){
@@ -85,7 +85,7 @@ var PropertyCreator = React.createClass({
 
 		var value = TypeProperty.prototype.components[ this.state.type ].prototype.defaultValue;
 
-		this.props.onCreate( this.state.attrkey, value, {type: this.state.type });
+		this.props.onCreate( this.state.name, value, {type: this.state.type });
 	},
 
 	getTypes: function(){
