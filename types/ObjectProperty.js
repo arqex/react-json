@@ -3,8 +3,7 @@
 var React = require('react'),
 	Property = require('../Property'),
 	PropertyCreator = require('../PropertyCreator'),
-	assign = require('object-assign'),
-	deepSettings = require('../deepSettings')
+	assign = require('object-assign')
 ;
 
 /**
@@ -50,7 +49,8 @@ var ObjectProperty = React.createClass({
 				ref: attr,
 				definition: definition,
 				onUpdated: this.updateProperty,
-				onDeleted: this.deleteProperty
+				onDeleted: this.deleteProperty,
+				parentSettings: this.props.settings
 			}));
 		}
 
@@ -58,16 +58,17 @@ var ObjectProperty = React.createClass({
 		if( this.props.settings.extensible !== false ){
 			openHashChildren.push( React.createElement( PropertyCreator, {
 					type: 'attribute',
-					onCreate: this.createProperty
+					onCreate: this.createProperty,
+					key: 'creator'
 				})
 			);
 		}
 
-		openHash = React.DOM.div({ className: 'attrChildren'}, openHashChildren);
+		openHash = React.DOM.div({ key: 'objectChildren', className: 'attrChildren'}, openHashChildren);
 
 		var header = this.props.settings.header || 'Map [' + keys.length + ']';
 		return React.DOM.span({className: className}, [
-			React.DOM.span({ onClick: this.toggleEditing, className: 'hashToggle' }, header),
+			React.DOM.span({ key: 'header', onClick: this.toggleEditing, className: 'hashToggle' }, header),
 			openHash
 		]);
 	},

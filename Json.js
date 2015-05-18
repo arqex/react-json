@@ -27,14 +27,12 @@ var Json = React.createClass({
 	},
 
 	childContextTypes: {
-		typeDefaults: React.PropTypes.object,
-		deepSettings: React.PropTypes.object
+		typeDefaults: React.PropTypes.object
 	},
 
 	getChildContext: function(){
 		return {
-			typeDefaults: this.state.defaults,
-			deepSettings: this.getDeepSettings()
+			typeDefaults: this.state.defaults
 		};
 	},
 

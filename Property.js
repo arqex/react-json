@@ -35,14 +35,14 @@ var Property = React.createClass({
 
 		if( this.state.error ){
 			className += ' jsonError';
-			error = React.DOM.span({ className: 'jsonErrorMsg' }, this.state.error );
+			error = React.DOM.span({ key:'e', className: 'jsonErrorMsg' }, this.state.error );
 		}
 
 		return React.DOM.div({className: className}, [
-			React.DOM.a({href: '#', className: 'attrRemove', onClick: this.handleRemove}, 'x'),
-			React.DOM.span({className: 'attrName'}, (definition.title || this.props.attrkey) + ':' ),
+			React.DOM.a({ key:'a', href: '#', className: 'attrRemove', onClick: this.handleRemove}, 'x'),
+			React.DOM.span({ key: 's1', className: 'attrName'}, (definition.title || this.props.attrkey) + ':' ),
 			error,
-			React.DOM.span({className: 'attrValue'}, typeProperty )
+			React.DOM.span({key:'s2', className: 'attrValue'}, typeProperty )
 		]);
 	},
 
@@ -60,7 +60,8 @@ var Property = React.createClass({
 			value: this.props.value,
 			settings: settings,
 			onUpdated: this.onUpdated,
-			ref: 'typeProperty'
+			ref: 'typeProperty',
+			parentSettings: this.props.parentSettings
 		});
 		return component;
 	},

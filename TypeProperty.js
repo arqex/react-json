@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react'),
+	deepSettings = require('./deepSettings'),
 	objectAssign = require('object-assign')
 ;
 
@@ -12,21 +13,19 @@ var TypeProperty = React.createClass({
 	typeCheckOrder: [],
 
 	contextTypes: {
-		typeDefaults: React.PropTypes.object,
-		deepSettings: React.PropTypes.object
+		typeDefaults: React.PropTypes.object
 	},
 
 	render: function() {
 		var Component = this.getComponent(),
 			settings = objectAssign(
 				{},
-				this.context.deepSettings,
 				this.context.typeDefaults[ this.props.type ],
 				this.props.settings
 			)
 		;
 
-		console.log( this.context );
+		this.addDeepSettings( settings );
 
 		return React.createElement( Component, {
 			value: this.props.value,
@@ -64,7 +63,19 @@ var TypeProperty = React.createClass({
 
 	getValidationErrors: function( jsonValue ){
 		return this.refs.property.getValidationErrors( jsonValue );
-	}
+	},
+
+	addDeepSettings: function( settings ){
+		var parentSettings = this.props.parentSettings || {},
+			deep
+		;
+
+		for( var key in deepSettings ){
+			deep = deepSettings[ key ]( parentSettings[key], settings[key] );
+			if( typeof deep != 'undefined' )
+				settings[ key ] = deep;
+		}
+ 	}
 });
 
 TypeProperty.registerType = function( name, Component, selectable ){

@@ -3,8 +3,7 @@
 var React = require('react'),
 	Property = require('../Property'),
 	PropertyCreator = require('../PropertyCreator'),
-	assign = require('object-assign'),
-	deepSettings = require('../deepSettings')
+	assign = require('object-assign')
 ;
 
 /**
@@ -49,7 +48,8 @@ var ArrayProperty = React.createClass({
 				attrkey: i,
 				definition: definition,
 				onUpdated: this.updateProperty,
-				onDeleted: this.deleteProperty
+				onDeleted: this.deleteProperty,
+				parentSettings: this.props.settings
 			}));
 		}
 
@@ -58,14 +58,15 @@ var ArrayProperty = React.createClass({
 			openArrayChildren.push( React.createElement( PropertyCreator, {
 					type: 'element',
 					attrkey: keys.length,
-					onCreate: this.createProperty
+					onCreate: this.createProperty,
+					key: 'c'
 				})
 			);
 		}
-		openArray = React.DOM.div({ className: 'attrChildren' }, openArrayChildren );
+		openArray = React.DOM.div({ key:'o', className: 'attrChildren' }, openArrayChildren );
 
 		return React.DOM.span({className: className}, [
-			React.DOM.span({ onClick: this.toggleEditing, className: 'hashToggle' }, 'List [' + keys.length + ']'),
+			React.DOM.span({ key: 's',onClick: this.toggleEditing, className: 'hashToggle' }, 'List [' + keys.length + ']'),
 			openArray
 		]);
 	},
