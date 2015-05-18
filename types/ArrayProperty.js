@@ -1,7 +1,10 @@
+'use strict';
+
 var React = require('react'),
 	Property = require('../Property'),
 	PropertyCreator = require('../PropertyCreator'),
-	assign = require('object-assign')
+	assign = require('object-assign'),
+	deepSettings = require('../deepSettings')
 ;
 
 /**
@@ -37,8 +40,8 @@ var ArrayProperty = React.createClass({
 			definition = definitions[ i ] || {};
 			if( !definition.settings )
 				definition.settings = {};
-			if( typeof definition.settings.editing == 'undefined' && this.state.editing == 'always' )
-				definition.settings.editing = 'always';
+
+			this.addDeepSettings( definition.settings );
 
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[i],
@@ -50,14 +53,16 @@ var ArrayProperty = React.createClass({
 			}));
 		}
 
-		openArray = React.DOM.div({ className: 'attrChildren'}, [
-			attrs,
-			React.createElement( PropertyCreator, {
-				type: 'element',
-				attrkey: keys.length,
-				onCreate: this.createProperty
-			})
-		]);
+		var openArrayChildren = [ attrs ];
+		if( this.props.settings.extensible !== false ){
+			openArrayChildren.push( React.createElement( PropertyCreator, {
+					type: 'element',
+					attrkey: keys.length,
+					onCreate: this.createProperty
+				})
+			);
+		}
+		openArray = React.DOM.div({ className: 'attrChildren' }, openArrayChildren );
 
 		return React.DOM.span({className: className}, [
 			React.DOM.span({ onClick: this.toggleEditing, className: 'hashToggle' }, 'List [' + keys.length + ']'),
@@ -99,6 +104,12 @@ var ArrayProperty = React.createClass({
 
 		this.setState({properties: properties});
 		this.props.value.set( key, value );
+	},
+
+	addDeepSettings: function( settings ){
+		for( var key in deepSettings ){
+			settings[ key ] = deepSettings[ key ]( this, settings[key] );
+		}
 	}
 });
 

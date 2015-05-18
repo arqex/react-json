@@ -1,7 +1,10 @@
+'use strict';
+
 var React = require('react'),
 	Property = require('../Property'),
 	PropertyCreator = require('../PropertyCreator'),
-	assign = require('object-assign')
+	assign = require('object-assign'),
+	deepSettings = require('../deepSettings')
 ;
 
 /**
@@ -37,8 +40,8 @@ var ObjectProperty = React.createClass({
 			definition = definitions[ attr ] || {};
 			if( !definition.settings )
 				definition.settings = {};
-			if( typeof definition.settings.editing == 'undefined' && this.state.editing == 'always' )
-				definition.settings.editing = 'always';
+
+			this.addDeepSettings( definition.settings );
 
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[attr],
@@ -51,13 +54,16 @@ var ObjectProperty = React.createClass({
 			}));
 		}
 
-		openHash = React.DOM.div({ className: 'attrChildren'}, [
-			attrs,
-			React.createElement( PropertyCreator, {
-				type: 'attribute',
-				onCreate: this.createProperty
-			})
-		]);
+		var openHashChildren = [ attrs ];
+		if( this.props.settings.extensible !== false ){
+			openHashChildren.push( React.createElement( PropertyCreator, {
+					type: 'attribute',
+					onCreate: this.createProperty
+				})
+			);
+		}
+
+		openHash = React.DOM.div({ className: 'attrChildren'}, openHashChildren);
 
 		var header = this.props.settings.header || 'Map [' + keys.length + ']';
 		return React.DOM.span({className: className}, [
@@ -112,6 +118,12 @@ var ObjectProperty = React.createClass({
 		});
 
 		return errors;
+	},
+
+	addDeepSettings: function( settings ){
+		for( var key in deepSettings ){
+			settings[ key ] = deepSettings[ key ]( this, settings[key] );
+		}
 	}
 });
 

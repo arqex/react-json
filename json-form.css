@@ -47,7 +47,7 @@
   text-decoration: none;
 }
 
-.hashAttribute:hover > .attrRemove {
+.jsonProperty:hover > .attrRemove {
   visibility: visible;
 }
 pre {

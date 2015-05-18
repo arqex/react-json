@@ -9,13 +9,6 @@ var React = require('react'),
 	TextProperty = require('./types/TextProperty')
 ;
 
-// Register basic types
-TypeProperty.registerType( 'object', ObjectProperty );
-TypeProperty.registerType( 'array', ArrayProperty, true );
-TypeProperty.registerType( 'string', StringProperty, true );
-TypeProperty.registerType( 'text', TextProperty, true );
-TypeProperty.registerType( 'number', NumberProperty, true );
-TypeProperty.registerType( 'boolean', BooleanProperty, true );
 
 /**
  * The main component. It will refresh the props when the store changes.
@@ -61,7 +54,8 @@ var Json = React.createClass({
 				value: this.state.doc,
 				settings: {
 					properties: definition.properties,
-					editing: definition.editing
+					editing: definition.editing,
+					extensible: definition.extensible
 				},
 				ref: 'doc'
 			})
@@ -82,5 +76,16 @@ var Json = React.createClass({
 		return errors.length ? errors : false;
 	}
 });
+
+// Add global modifier functions
+Json.registerType = TypeProperty.registerType.bind( TypeProperty );
+
+// Register basic types
+Json.registerType( 'object', ObjectProperty );
+Json.registerType( 'array', ArrayProperty, true );
+Json.registerType( 'string', StringProperty, true );
+Json.registerType( 'text', TextProperty, true );
+Json.registerType( 'number', NumberProperty, true );
+Json.registerType( 'boolean', BooleanProperty, true );
 
 module.exports = Json;
