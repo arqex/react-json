@@ -31,7 +31,7 @@ var Property = React.createClass({
 			error = ''
 		;
 
-		className += ' json_' + type;
+		className += ' ' + type + 'Property';
 
 		if( this.state.error ){
 			className += ' jsonError';
@@ -39,10 +39,10 @@ var Property = React.createClass({
 		}
 
 		return React.DOM.div({className: className}, [
-			React.DOM.a({ key:'a', href: '#', className: 'attrRemove', onClick: this.handleRemove}, 'x'),
-			React.DOM.span({ key: 's1', className: 'attrName'}, (definition.title || this.props.attrkey) + ':' ),
+			React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x'),
+			React.DOM.span({ key: 's1', className: 'jsonName'}, (definition.title || this.props.attrkey) + ':' ),
 			error,
-			React.DOM.span({key:'s2', className: 'attrValue'}, typeProperty )
+			React.DOM.span({key:'s2', className: 'jsonValue'}, typeProperty )
 		]);
 	},
 

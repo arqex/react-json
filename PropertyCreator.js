@@ -19,7 +19,7 @@ var PropertyCreator = React.createClass({
 
 	render: function(){
 		if( !this.state.creating )
-			return React.DOM.a({ href: '#', onClick: this.handleCreate }, '+ Add ' + this.props.type );
+			return React.DOM.a({ className: 'jsonAdd', href: '#', onClick: this.handleCreate }, '+ Add ' + this.props.type );
 
 		var options = this.getTypes().map( function( type ){
 				return React.DOM.option({value: type, key: type}, type[0].toUpperCase() + type.slice(1));
@@ -30,7 +30,10 @@ var PropertyCreator = React.createClass({
 		if( this.props.type == 'null' )
 			attrName = '';
 		else if( typeof this.props.attrkey != 'undefined' )
-			attrName =  React.DOM.span({className: 'attrName'}, this.props.attrkey);
+			attrName =  [
+				React.DOM.span({className: 'jsonName'}, this.props.attrkey),
+				React.DOM.span(null, ':')
+			];
 		else {
 			attrName = [
 				React.DOM.input({ref: 'keyInput', type: 'text', value: this.state.value, onChange: this.changeKey}),
@@ -38,11 +41,11 @@ var PropertyCreator = React.createClass({
 			];
 		}
 
-		return React.DOM.div( {className: 'jsonProperty'}, [
+		return React.DOM.div( {className: 'jsonProperty jsonPropertyAdder'}, [
 			attrName,
 			React.DOM.select({ value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
 			React.DOM.button({ onClick: this.createProperty }, 'OK' ),
-			React.DOM.a({ href: '#', className: 'cancelAttr', onClick: this.handleCancel}, 'Cancel')
+			React.DOM.a({ href: '#', className: 'cancelProperty', onClick: this.handleCancel}, 'Cancel')
 		]);
 	},
 

@@ -28,7 +28,7 @@ var ObjectProperty = React.createClass({
 
 	render: function(){
 		var keys = Object.keys( this.props.value ),
-			className = this.state.editing ? 'open objectAttr compoundAttr' : 'objectAttr compoundAttr',
+			className = this.state.editing ? 'open jsonObject jsonCompound' : 'jsonObject jsonCompound',
 			openHash = '',
 			definitions = this.state.properties,
 			attrs = [],
@@ -64,11 +64,11 @@ var ObjectProperty = React.createClass({
 			);
 		}
 
-		openHash = React.DOM.div({ key: 'objectChildren', className: 'attrChildren'}, openHashChildren);
+		openHash = React.DOM.div({ key: 'o', className: 'jsonChildren'}, openHashChildren);
 
 		var header = this.props.settings.header || 'Map [' + keys.length + ']';
 		return React.DOM.span({className: className}, [
-			React.DOM.span({ key: 'header', onClick: this.toggleEditing, className: 'hashToggle' }, header),
+			React.DOM.span({ key: 's', onClick: this.toggleEditing, className: 'compoundToggle' }, header),
 			openHash
 		]);
 	},

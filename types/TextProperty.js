@@ -21,7 +21,7 @@ var TextAttribute = React.createClass({
 	defaultValue: '',
 
 	render: function(){
-		var className = 'textAttr';
+		var className = 'jsonText';
 
 		if( !this.state.editing )
 			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );

@@ -27,7 +27,7 @@ var ArrayProperty = React.createClass({
 
 	render: function(){
 		var keys = Object.keys( this.props.value ),
-			className = this.state.editing ? 'open arrayAttr compoundAttr' : 'arrayAttr compoundAttr',
+			className = this.state.editing ? 'open jsonArray jsonCompound' : 'jsonArray jsonCompound',
 			openArray = '',
 			definitions = this.state.properties
 		;
@@ -63,10 +63,10 @@ var ArrayProperty = React.createClass({
 				})
 			);
 		}
-		openArray = React.DOM.div({ key:'o', className: 'attrChildren' }, openArrayChildren );
+		openArray = React.DOM.div({ key:'o', className: 'jsonChildren' }, openArrayChildren );
 
 		return React.DOM.span({className: className}, [
-			React.DOM.span({ key: 's',onClick: this.toggleEditing, className: 'hashToggle' }, 'List [' + keys.length + ']'),
+			React.DOM.span({ key: 's',onClick: this.toggleEditing, className: 'compoundToggle' }, 'List [' + keys.length + ']'),
 			openArray
 		]);
 	},

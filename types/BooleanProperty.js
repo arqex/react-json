@@ -9,9 +9,14 @@ var BooleanAttribute = React.createClass({
 	defaultValue: false,
 
 	render: function(){
-		var className = 'booleanAttr';
+		var className = 'jsonBoolean';
 
-		return React.DOM.input({type: "checkbox", checked: this.props.value, onChange: this.updateValue });
+		return React.DOM.input({
+			type: "checkbox",
+			className: className,
+			checked: this.props.value,
+			onChange: this.updateValue
+		});
 	},
 
 	setValue: function(){

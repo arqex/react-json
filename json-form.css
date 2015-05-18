@@ -1,6 +1,6 @@
 
 /* JSON Editor */
-.jsonEditor > .objectAttr {
+.jsonEditor > .jsonObject {
   float: left;
 }
 
@@ -8,46 +8,52 @@
 	vertical-align: top;
 }
 
-.attrChildren {
+.jsonChildren {
   margin-left: 20px;
   display: none;
   font-weight: normal;
   border-left: 1px dotted #ddd;
 }
-.compoundAttr.open > .attrChildren {
+.jsonCompound.open > .jsonChildren {
   display: block;
 }
-.hashToggle:before {
+.jsonPropertyAdder {
+  margin-left: 13px;
+}
+.jsonPropertyAdder select {
+  margin-left: 5px;
+}
+.compoundToggle:before {
   content: '▸';
   color: #333;
   line-height: 1em;
   margin-right: 3px;
 }
-.open > .hashToggle:before {
+.open > .compoundToggle:before {
   content: '▾';
 }
 
-.attrName {
+.jsonName {
   font-style: italic;
 }
 
-.attrValue {
+.jsonValue {
   margin-left: 5px;
 }
 
-.attrValue > input,
-.attrValue > textarea,
-.attrValue > select {
+.jsonValue > input,
+.jsonValue > textarea,
+.jsonValue > select {
 	margin-bottom: 5px;
 }
 
-.attrRemove {
+.jsonRemove {
   visibility: hidden;
   margin-right: 5px;
   text-decoration: none;
 }
 
-.jsonProperty:hover > .attrRemove {
+.jsonProperty:hover > .jsonRemove {
   visibility: visible;
 }
 pre {
@@ -59,14 +65,14 @@ pre {
   margin: 0 10px 0 0;
 }
 
-.hashToggle, .stringAttr{
+.compoundToggle, .jsonString{
   cursor: pointer;
 }
 
-.json_boolean * {
+.booleanProperty * {
 	vertical-align: middle;
 }
 
-.json_boolean input{
+.booleanProperty input {
 	margin-bottom: 0;
 }

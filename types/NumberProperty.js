@@ -21,7 +21,7 @@ var NumberAttribute = React.createClass({
 	defaultValue: '',
 
 	render: function(){
-		var className = 'numberAttr';
+		var className = 'jsonNumber';
 
 		if( !this.state.editing )
 			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
