@@ -27,9 +27,7 @@ var PropertyAdder = React.createClass({
 			propertyName
 		;
 
-		if( this.props.type == 'null' )
-			propertyName = '';
-		else if( typeof this.props.name != 'undefined' )
+		if( typeof this.props.name != 'undefined' )
 			propertyName =  [
 				React.DOM.span({className: 'jsonName'}, this.props.name),
 				React.DOM.span(null, ':')

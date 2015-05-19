@@ -49,7 +49,7 @@ var NumberAttribute = React.createClass({
 
 	componentWillReceiveProps: function( nextProps ){
 		if( this.props.value != nextProps.value )
-			this.setState( this.getStateFromProps( nextProps ) );
+			this.setState( { value: nextProps.value } );
 		else if( this.props.settings.editing != nextProps.settings.editing )
 			this.setState({ editing: nextProps.editing });
 	},
