@@ -53,7 +53,7 @@
   text-decoration: none;
 }
 
-.jsonProperty:hover > .jsonRemove {
+.jsonName:hover > .jsonRemove {
   visibility: visible;
 }
 pre {
@@ -75,4 +75,19 @@ pre {
 
 .booleanProperty input {
 	margin-bottom: 0;
+}
+
+.jsonError > .jsonName,
+.jsonError > .jsonValue .jsonErrorMsg {
+	color: #f36;
+}
+
+.jsonError > .jsonValue .jsonErrorMsg {
+	margin-left: 10px;
+}
+
+.jsonError > .jsonValue input,
+.jsonError > .jsonValue select,
+.jsonError > .jsonValue textarea {
+	background-color: #fff8f8;
 }

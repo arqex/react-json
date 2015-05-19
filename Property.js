@@ -39,10 +39,14 @@ var Property = React.createClass({
 		}
 
 		return React.DOM.div({className: className}, [
-			React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x'),
-			React.DOM.span({ key: 's1', className: 'jsonName'}, (definition.title || this.props.name) + ':' ),
-			error,
-			React.DOM.span({key:'s2', className: 'jsonValue'}, typeProperty )
+			React.DOM.span( {className: 'jsonName'}, [
+				React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x'),
+				React.DOM.span({ key: 's1' }, (definition.title || this.props.name) + ':' )
+			]),
+			React.DOM.span( {className: 'jsonValue'}, [
+				React.DOM.span({key:'s2', className: 'jsonValue'}, typeProperty ),
+				error
+			])
 		]);
 	},
 
