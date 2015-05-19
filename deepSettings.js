@@ -8,13 +8,13 @@ module.exports = {
 
 		// else return undefined: do not override
 	},
-	extensible: function( parentValue, value ){
+	adder: function( parentValue, value ){
 
 		if( typeof value != 'undefined' )
 			return value;
+		if( typeof parentValue != 'undefined' )
+			return parentValue;
 
-		return parentValue;
-
-		// else return undefined: do not override
+		return true;
 	}
 };

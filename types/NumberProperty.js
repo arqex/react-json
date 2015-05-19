@@ -48,8 +48,10 @@ var NumberAttribute = React.createClass({
 	},
 
 	componentWillReceiveProps: function( nextProps ){
-		if( this.props.settings && this.props.settings.editing != nextProps.settings.editing )
-			this.setState({ editing: nextProps.settings.editing });
+		if( this.props.value != nextProps.value )
+			this.setState( this.getStateFromProps( nextProps ) );
+		else if( this.props.settings.editing != nextProps.settings.editing )
+			this.setState({ editing: nextProps.editing });
 	},
 
 	setEditMode: function(){

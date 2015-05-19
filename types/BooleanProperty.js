@@ -30,6 +30,11 @@ var BooleanAttribute = React.createClass({
 
 	isType: function( value ){
 		return typeof value == 'boolean';
+	},
+
+	componentWillReceiveProps: function( nextProps ){
+		if( this.props.value != nextProps.value )
+			this.setState( { value: nextProps.value } );
 	}
 });
 

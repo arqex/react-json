@@ -8,7 +8,7 @@ var React = require('react'),
  * @param  {string} name Optional. If provided, the attribute added will have that key (arrays).
  *                           Otherwise an input will be shown to let the user define the key.
  */
-var PropertyCreator = React.createClass({
+var PropertyAdder = React.createClass({
 	getInitialState: function(){
 		return {
 			creating: this.props.creating || false,
@@ -19,7 +19,7 @@ var PropertyCreator = React.createClass({
 
 	render: function(){
 		if( !this.state.creating )
-			return React.DOM.a({ className: 'jsonAdd', href: '#', onClick: this.handleCreate }, '+ Add ' + this.props.type );
+			return React.DOM.a({ className: 'jsonAdd', href: '#', onClick: this.handleCreate }, this.props.text );
 
 		var options = this.getTypes().map( function( type ){
 				return React.DOM.option({value: type, key: type}, type[0].toUpperCase() + type.slice(1));
@@ -93,4 +93,4 @@ var PropertyCreator = React.createClass({
 	}
 });
 
-module.exports = PropertyCreator;
+module.exports = PropertyAdder;

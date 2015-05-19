@@ -49,7 +49,9 @@ var StringAttribute = React.createClass({
 	},
 
 	componentWillReceiveProps: function( nextProps ){
-		if( this.props.editing != nextProps.editing )
+		if( this.props.value != nextProps.value )
+			this.setState( this.getStateFromProps( nextProps ) );
+		else if( this.props.settings.editing != nextProps.settings.editing )
 			this.setState({ editing: nextProps.editing });
 	},
 
