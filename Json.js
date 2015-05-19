@@ -74,7 +74,8 @@ var Json = React.createClass({
 					properties: definition.properties,
 					editing: definition.editing,
 					extensible: definition.extensible,
-					header: false
+					header: false,
+					order: definition.order
 				}),
 				ref: 'doc',
 				defaults: this.state.defaults

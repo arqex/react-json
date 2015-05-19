@@ -65,7 +65,7 @@ module.exports = {
 	createProperty: function( key, value, definition ){
 
 		if( this.props.value[ key ] )
-			return console.log( 'Property ' + key + 'already exists.');
+			return console.log( 'Property ' + key + ' already exists.');
 
 		// Start editing
 		definition.settings = {editing: this.state.editing == 'always' ? 'always' : true };

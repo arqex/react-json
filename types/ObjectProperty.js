@@ -28,32 +28,19 @@ var ObjectProperty = React.createClass({
 	defaultValue: {},
 
 	render: function(){
-		var settings = this.props.settings,
+		var me = this,
+			settings = this.props.settings,
 			className = this.state.editing || settings.header === false ? 'open jsonObject jsonCompound' : 'jsonObject jsonCompound',
 			openHash = '',
 			definitions = this.state.properties,
 			attrs = [],
+			value = assign({}, this.props.value ),
 			definition
 		;
 
-		for( var attr in this.props.value ){
-			definition = definitions[ attr ] || {};
-			if( !definition.settings )
-				definition.settings = {};
-
-			//this.addDeepSettings( definition.settings );
-
-			attrs.push( React.createElement( Property, {
-				value: this.props.value[attr],
-				key: attr,
-				name: attr,
-				ref: attr,
-				definition: definition,
-				onUpdated: this.updateProperty,
-				onDeleted: this.deleteProperty,
-				parentSettings: settings
-			}));
-		}
+		this.getPropertyOrder().forEach( function( propertyName ){
+			attrs.push( me.renderProperty( propertyName ));
+		});
 
 		var openHashChildren = [ attrs ];
 		if( settings.adder !== false ){
@@ -65,6 +52,26 @@ var ObjectProperty = React.createClass({
 			this.renderHeader(),
 			openHash
 		]);
+	},
+
+	renderProperty: function( key ){
+		var value = this.props.value[ key ],
+			definition = this.state.properties[ key ] || {}
+		;
+
+		if( !definition.settings )
+			definition.settings = {};
+
+		return React.createElement( Property, {
+			value: value,
+			key: key,
+			name: key,
+			ref: key,
+			definition: definition,
+			onUpdated: this.updateProperty,
+			onDeleted: this.deleteProperty,
+			parentSettings: this.props.settings
+		});
 	},
 
 	getDefaultHeader: function(){
@@ -96,6 +103,42 @@ var ObjectProperty = React.createClass({
 		});
 
 		return errors;
+	},
+
+	getPropertyOrder: function(){
+		var settingsOrder = this.props.settings.order,
+			orderType = typeof settingsOrder
+		;
+
+		if( !settingsOrder || (orderType != 'function' && settingsOrder.constructor !== Array) )
+			return Object.keys( this.props.value );
+
+		var value = assign( {}, this.props.value ),
+			order = []
+		;
+
+		if( orderType == 'function' )
+			return settingsOrder( value );
+
+		// Add properties in the array
+		if( settingsOrder.constructor === Array ){
+			settingsOrder.forEach( function( name ){
+				if( typeof value[ name ] != 'undefined' ){
+					order.push( name );
+
+					// Delete them from current values
+					delete value[ name ];
+				}
+			});
+		}
+
+		// Add the keys left in the value
+		for( var key in value ){
+			if( order.indexOf( key ) == -1 )
+				order.push( key );
+		}
+
+		return order;
 	}
 });
 

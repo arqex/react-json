@@ -42,8 +42,6 @@ var ArrayProperty = React.createClass({
 			if( !definition.settings )
 				definition.settings = {};
 
-			//this.addDeepSettings( definition.settings );
-
 			attrs.push( React.createElement( Property, {
 				value: this.props.value[i],
 				key: i,
