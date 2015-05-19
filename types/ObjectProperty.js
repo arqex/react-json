@@ -27,8 +27,8 @@ var ObjectProperty = React.createClass({
 	defaultValue: {},
 
 	render: function(){
-		var keys = Object.keys( this.props.value ),
-			className = this.state.editing ? 'open jsonObject jsonCompound' : 'jsonObject jsonCompound',
+		var settings = this.props.settings,
+			className = this.state.editing || settings.header === false ? 'open jsonObject jsonCompound' : 'jsonObject jsonCompound',
 			openHash = '',
 			definitions = this.state.properties,
 			attrs = [],
@@ -50,12 +50,12 @@ var ObjectProperty = React.createClass({
 				definition: definition,
 				onUpdated: this.updateProperty,
 				onDeleted: this.deleteProperty,
-				parentSettings: this.props.settings
+				parentSettings: settings
 			}));
 		}
 
 		var openHashChildren = [ attrs ];
-		if( this.props.settings.extensible !== false ){
+		if( settings.extensible !== false ){
 			openHashChildren.push( React.createElement( PropertyCreator, {
 					type: 'attribute',
 					onCreate: this.createProperty,
@@ -65,12 +65,36 @@ var ObjectProperty = React.createClass({
 		}
 
 		openHash = React.DOM.div({ key: 'o', className: 'jsonChildren'}, openHashChildren);
-
-		var header = this.props.settings.header || 'Map [' + keys.length + ']';
 		return React.DOM.span({className: className}, [
-			React.DOM.span({ key: 's', onClick: this.toggleEditing, className: 'compoundToggle' }, header),
+			this.renderHeader(),
 			openHash
 		]);
+	},
+
+	renderHeader: function(){
+		var settingsHeader = this.props.settings.header;
+		if( settingsHeader === false )
+			return '';
+
+		var type = typeof settingsHeader,
+			header
+		;
+
+		if( type == 'function' ){
+			header = settingsHeader( this.props.value.toJS() );
+		}
+		else if( type == 'undefined' ){
+			header = this.getDefaultHeader();
+		}
+		else {
+			header = settingsHeader;
+		}
+
+		return React.DOM.span({ key: 's', onClick: this.toggleEditing, className: 'compoundToggle' }, header);
+	},
+
+	getDefaultHeader: function(){
+		return 'Map [' + Object.keys( this.props.value ) + ']';
 	},
 
 	componentWillReceiveProps: function( nextProps ){
@@ -79,7 +103,7 @@ var ObjectProperty = React.createClass({
 	},
 
 	toggleEditing: function(){
-		if( this.state.editing != 'always' )
+		if( this.state.editing != 'always' && this.props.settings.header !== false )
 			this.setState({editing: !this.state.editing});
 	},
 

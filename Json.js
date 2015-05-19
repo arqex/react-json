@@ -73,7 +73,8 @@ var Json = React.createClass({
 				settings: objectAssign( {}, this.state.defaults.object, {
 					properties: definition.properties,
 					editing: definition.editing,
-					extensible: definition.extensible
+					extensible: definition.extensible,
+					header: false
 				}),
 				ref: 'doc',
 				defaults: this.state.defaults

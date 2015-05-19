@@ -66,10 +66,37 @@ var ArrayProperty = React.createClass({
 		openArray = React.DOM.div({ key:'o', className: 'jsonChildren' }, openArrayChildren );
 
 		return React.DOM.span({className: className}, [
-			React.DOM.span({ key: 's',onClick: this.toggleEditing, className: 'compoundToggle' }, 'List [' + keys.length + ']'),
+			this.renderHeader(),
 			openArray
 		]);
 	},
+
+	renderHeader: function(){
+		var settingsHeader = this.props.settings.header;
+		if( settingsHeader === false )
+			return '';
+
+		var type = typeof settingsHeader,
+			header
+		;
+
+		if( type == 'function' ){
+			header = settingsHeader( this.props.value.toJS() );
+		}
+		else if( type == 'undefined' ){
+			header = this.getDefaultHeader();
+		}
+		else {
+			header = settingsHeader;
+		}
+
+		return React.DOM.span({ key: 's', onClick: this.toggleEditing, className: 'compoundToggle' }, header);
+	},
+
+	getDefaultHeader: function(){
+		return 'List [' + this.props.value.length + ']';
+	},
+
 	toggleEditing: function(){
 		if( this.state.editing != 'always' )
 			this.setState({editing: !this.state.editing});
