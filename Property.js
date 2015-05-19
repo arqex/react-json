@@ -39,14 +39,14 @@ var Property = React.createClass({
 		}
 
 		return React.DOM.div({className: className}, [
-			React.DOM.span( {className: 'jsonName'}, [
+			React.DOM.span( {className: 'jsonName', key: 'n'}, [
 				React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x'),
 				React.DOM.span({ key: 's1' }, (definition.title || this.props.name) + ':' )
 			]),
-			React.DOM.span( {className: 'jsonValue'}, [
-				React.DOM.span({key:'s2', className: 'jsonValue'}, typeProperty ),
-				error
-			])
+			React.DOM.span( {className: 'jsonValue', key: 'v'}, [
+				React.DOM.span({key:'s2'}, typeProperty )
+			]),
+			error
 		]);
 	},
 
@@ -106,6 +106,7 @@ var Property = React.createClass({
 		var error = Validation.getValidationError( this.props.value, jsonValue, validates ),
 			message
 		;
+
 		if( error ){
 			message = this.props.definition.errorMessage;
 			if( !message )
@@ -115,6 +116,9 @@ var Property = React.createClass({
 			error.message = message;
 			this.setState( {error: message} );
 			childErrors = childErrors.concat( [error] );
+		}
+		else if( this.state.error ){
+			this.setState( {error: false} );
 		}
 
 		return childErrors;

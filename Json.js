@@ -22,7 +22,8 @@ var Json = React.createClass({
 
 	getDefaultProps: function(){
 		return {
-			doc: {}
+			doc: {},
+			errors: false
 		};
 	},
 
@@ -49,6 +50,9 @@ var Json = React.createClass({
 		// Listen to changes
 		doc.getListener().on('update', function( updated ){
 			me.setState({doc: updated});
+
+			if( me.state.errors )
+				me.getValidationErrors();
 		});
 
 		return {
@@ -94,6 +98,7 @@ var Json = React.createClass({
 			errors = this.refs.doc.getValidationErrors( jsonValue )
 		;
 
+		this.setState( {errors: errors.length} );
 		return errors.length ? errors : false;
 	},
 	getDeepSettings: function(){

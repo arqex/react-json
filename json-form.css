@@ -78,12 +78,15 @@ pre {
 }
 
 .jsonError > .jsonName,
-.jsonError > .jsonValue .jsonErrorMsg {
+.jsonError .jsonErrorMsg {
 	color: #f36;
 }
 
-.jsonError > .jsonValue .jsonErrorMsg {
-	margin-left: 10px;
+.jsonError .jsonErrorMsg {
+	margin: 0 0 10px 10px;
+	font-size: 0.9em;
+	vertical-align: bottom;
+	display: block;
 }
 
 .jsonError > .jsonValue input,
