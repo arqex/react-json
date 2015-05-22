@@ -76,4 +76,21 @@ module.exports = {
 		this.setState({properties: properties});
 		this.props.value.set( key, value );
 	},
+
+	/**
+	 * Checks if the current key editing setting is true
+	 * and set it to false. The editing setting is set
+	 * to true when a new child is added to edit it automatically
+	 * after is edited it loses the point.
+	 *
+	 * @param  {String} key The child key
+	 */
+	checkEditingSetting: function( key ){
+		var properties = this.state.properties;
+		if( properties[ key ] && properties[ key ].settings.editing === true ){
+			properties = assign({}, properties);
+			properties[key].settings.editing = false;
+			this.setState( {properties: properties} );
+		}
+	}
 };

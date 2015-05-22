@@ -75,11 +75,25 @@ var ArrayProperty = React.createClass({
 	},
 
 	updateProperty: function( key, value ){
+		this.checkEditingSetting( key );
 		this.props.value.set( key, value );
 	},
 
 	deleteProperty: function( key ){
+		var properties = {};
+
+		for( var index in this.state.properties ){
+			if( index > key ){
+				properties[ index - 1 ] = this.state.properties[ index ];
+			}
+			else if( index < key ){
+				properties[ index ] = this.state.properties[ index ];
+			}
+			// If they are equal we are deleting the element, do nothing
+		}
+
 		this.props.value.splice( key, 1 );
+		this.setState( { properties: properties } );
 	},
 
 	isType: function( value ){

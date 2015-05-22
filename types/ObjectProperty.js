@@ -83,6 +83,7 @@ var ObjectProperty = React.createClass({
 	},
 
 	updateProperty: function( key, value ){
+		this.checkEditingSetting( key );
 		this.props.value.set( key, value );
 	},
 
