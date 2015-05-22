@@ -14,7 +14,7 @@ module.exports = {
 		var className = this.typeClass;
 
 		if( !this.state.editing )
-			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
+			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.getDisplayString() );
 
 		return React.DOM.input({
 			type: this.inputType,
@@ -25,6 +25,12 @@ module.exports = {
 			ref: 'input',
 			onKeyDown: this.handleKeyDown
 		});
+	},
+
+	getDisplayString: function(){
+		if( this.getDisplayModeString )
+			return this.getDisplayModeString();
+		return this.props.value;
 	},
 
 	componentWillReceiveProps: function( nextProps ){

@@ -8,6 +8,7 @@ var React = require('react'),
 	BooleanProperty = require('./types/BooleanProperty'),
 	NumberProperty = require('./types/NumberProperty'),
 	TextProperty = require('./types/TextProperty'),
+	PasswordProperty = require('./types/PasswordProperty'),
 	deepSettings = require('./deepSettings')
 ;
 
@@ -134,5 +135,6 @@ Json.registerType( 'string', StringProperty, true );
 Json.registerType( 'text', TextProperty, true );
 Json.registerType( 'number', NumberProperty, true );
 Json.registerType( 'boolean', BooleanProperty, true );
+Json.registerType( 'password', PasswordProperty, true );
 
 module.exports = Json;
