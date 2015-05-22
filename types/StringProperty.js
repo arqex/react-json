@@ -29,6 +29,7 @@ var StringAttribute = React.createClass({
 		return React.DOM.input({
 			type: 'text',
 			value: this.state.value,
+			placeholder: this.props.settings.placeholder || '',
 			onChange: this.updateValue,
 			onBlur: this.setValue,
 			ref: 'input',

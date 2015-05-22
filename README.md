@@ -1,2 +1,2 @@
 # json-form
-A JSON editor packed as a React.js component. The easiest way of create web forms.
+A JSON editor packed as a React.js component, but also the simplest way of creating web forms.

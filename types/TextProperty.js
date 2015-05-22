@@ -29,6 +29,7 @@ var TextAttribute = React.createClass({
 		return React.DOM.textarea({
 			value: this.state.value,
 			onChange: this.updateValue,
+			placeholder: this.props.settings.placeholder || '',
 			onBlur: this.setValue,
 			ref: 'input',
 			onKeyDown: this.handleKeyDown
