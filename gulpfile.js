@@ -14,6 +14,7 @@ var getWPConfig = function( filename ){
 		},
 		output: {
 			libraryTarget: 'umd',
+			library: 'Json',
 			filename: filename + '.js'
 		}
 	};
