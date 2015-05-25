@@ -5,11 +5,11 @@ MIT: https://github.com/arqex/react-json/raw/master/LICENSE
 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require(undefined), require("Freezer"));
+		module.exports = factory(require(undefined), require(undefined));
 	else if(typeof define === 'function' && define.amd)
-		define([, "Freezer"], factory);
+		define([, ], factory);
 	else if(typeof exports === 'object')
-		exports["Json"] = factory(require(undefined), require("Freezer"));
+		exports["Json"] = factory(require(undefined), require(undefined));
 	else
 		root["Json"] = factory(root["React"], root["Freezer"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__) {
@@ -71,7 +71,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_2__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external \"Freezer\"\n ** module id = 2\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%22Freezer%22?");
+	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_2__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external {\"root\":\"Freezer\"}\n ** module id = 2\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%7B%22root%22:%22Freezer%22%7D?");
 
 /***/ },
 /* 3 */

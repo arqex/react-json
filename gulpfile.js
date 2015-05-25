@@ -53,11 +53,11 @@ gulp.task("build", function( callback ) {
 
 	config = getWPConfig( 'Json-no-freezer' );
 	config.devtool = '#eval';
-	config.externals['freezer-js'] = 'Freezer';
+	config.externals['freezer-js'] = { root: 'Freezer' };
 	wp( config );
 
 	config = getWPConfig( 'Json-no-freezer.min' );
-	config.externals['freezer-js'] = 'Freezer';
+	config.externals['freezer-js'] = { root: 'Freezer' };
 	return wp( config, true );
 });
 
