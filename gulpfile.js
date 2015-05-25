@@ -10,7 +10,9 @@ var pack = require( './package.json' );
 var getWPConfig = function( filename ){
 	return {
 		externals: {
-			react: 'React'
+			react: {
+				root: 'React'
+			}
 		},
 		output: {
 			libraryTarget: 'umd',
