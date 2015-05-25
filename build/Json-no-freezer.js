@@ -5,11 +5,11 @@ MIT: https://github.com/arqex/react-json/raw/master/LICENSE
 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("freezer-js"));
+		module.exports = factory(require("React"), require("Freezer"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "freezer-js"], factory);
+		define(["React", "Freezer"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("react"), require("freezer-js")) : factory(root["react"], root["freezer-js"]);
+		var a = typeof exports === 'object' ? factory(require("React"), require("Freezer")) : factory(root["React"], root["Freezer"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
 })(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_2__) {
@@ -65,13 +65,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_1__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external \"react\"\n ** module id = 1\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%22react%22?");
+	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_1__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external \"React\"\n ** module id = 1\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%22React%22?");
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_2__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external \"freezer-js\"\n ** module id = 2\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%22freezer-js%22?");
+	eval("module.exports = __WEBPACK_EXTERNAL_MODULE_2__;\n\n/*****************\n ** WEBPACK FOOTER\n ** external \"Freezer\"\n ** module id = 2\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///external_%22Freezer%22?");
 
 /***/ },
 /* 3 */

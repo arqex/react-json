@@ -10,7 +10,7 @@ var pack = require( './package.json' );
 var getWPConfig = function( filename ){
 	return {
 		externals: {
-			react: 'react'
+			react: 'React'
 		},
 		output: {
 			libraryTarget: 'umd',
@@ -50,11 +50,11 @@ gulp.task("build", function( callback ) {
 
 	config = getWPConfig( 'Json-no-freezer' );
 	config.devtool = '#eval';
-	config.externals['freezer-js'] = 'freezer-js';
+	config.externals['freezer-js'] = 'Freezer';
 	wp( config );
 
 	config = getWPConfig( 'Json-no-freezer.min' );
-	config.externals['freezer-js'] = 'freezer-js';
+	config.externals['freezer-js'] = 'Freezer';
 	return wp( config, true );
 });
 
