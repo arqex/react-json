@@ -67,8 +67,11 @@ module.exports = {
 		if( this.props.value[ key ] )
 			return console.log( 'Field ' + key + ' already exists.');
 
-		// Start editing
-		definition.settings = {editing: this.state.editing == 'always' ? 'always' : true };
+		// Start editing and focus
+		definition.settings = {
+			editing: this.state.editing == 'always' ? 'always' : true,
+			focus: true
+		};
 
 		var fields = assign( {}, this.state.fields );
 		fields[ key ] = definition;
@@ -87,9 +90,9 @@ module.exports = {
 	 */
 	checkEditingSetting: function( key ){
 		var fields = this.state.fields;
-		if( fields[ key ] && fields[ key ].settings.editing === true ){
+		if( fields[ key ] && fields[ key ].settings.focus === true ){
 			fields = assign({}, fields);
-			fields[key].settings.editing = false;
+			fields[key].settings.focus = false;
 			this.setState( {fields: fields} );
 		}
 	},

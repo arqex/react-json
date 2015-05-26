@@ -35,20 +35,30 @@ module.exports = {
 	},
 
 	componentWillReceiveProps: function( nextProps ){
-		if( this.props.value != nextProps.value )
-			this.setState( { value: nextProps.value } );
-		else if( this.props.settings.editing != nextProps.settings.editing )
-			this.setState({ editing: nextProps.editing });
+		var nextState = {},
+			update = false
+		;
+
+		if( this.props.value != nextProps.value ){
+			update = true;
+			nextState.value = nextProps.value;
+		}
+		if( this.props.settings.editing != nextProps.settings.editing ){
+			update = true;
+			nextState.editing = nextProps.editing;
+		}
+		if( update )
+			this.setState( nextState );
 	},
 
 	componentDidUpdate: function( prevProps, prevState ){
-		if( this.state.editing && ! prevState.editing ){
+		if( this.state.editing && ! prevState.editing || this.props.settings.focus ){
 			this.focus();
 		}
 	},
 
 	componentDidMount: function(){
-		if( this.state.editing )
+		if( this.state.editing === true || this.props.settings.focus )
 			this.focus();
 	},
 
