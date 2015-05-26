@@ -19,6 +19,7 @@ module.exports = {
 		return React.DOM.input({
 			type: this.inputType,
 			value: this.state.value,
+			id: this.props.id,
 			placeholder: this.props.settings.placeholder || '',
 			onChange: this.updateValue,
 			onBlur: this.setValue,

@@ -27,7 +27,8 @@ var Field = React.createClass({
 		var definition = this.props.definition || {},
 			className = 'jsonField',
 			type = definition.type || TypeField.prototype.guessType( this.props.value ),
-			typeField = this.renderTypeField( type ),
+			id = this.props.id + '_' + this.props.name,
+			typeField = this.renderTypeField( type, id ),
 			error = ''
 		;
 
@@ -41,7 +42,7 @@ var Field = React.createClass({
 		return React.DOM.div({className: className}, [
 			React.DOM.span( {className: 'jsonName', key: 'n'}, [
 				React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x'),
-				React.DOM.span({ key: 's1' }, (definition.title || this.props.name) + ':' )
+				React.DOM.label({ key: 's1', htmlFor: id }, (definition.title || this.props.name) + ':' )
 			]),
 			React.DOM.span( {className: 'jsonValue', key: 'v'}, [
 				React.DOM.span({key:'s2'}, typeField )
@@ -50,7 +51,7 @@ var Field = React.createClass({
 		]);
 	},
 
-	renderTypeField: function( type ){
+	renderTypeField: function( type, id ){
 		var definition = this.props.definition || {},
 			settings = objectAssign( {}, definition.settings || {} ),
 			component
@@ -65,6 +66,7 @@ var Field = React.createClass({
 			settings: settings,
 			onUpdated: this.onUpdated,
 			ref: 'typeField',
+			id: id,
 			parentSettings: this.props.parentSettings
 		});
 		return component;

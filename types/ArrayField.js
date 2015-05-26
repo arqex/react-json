@@ -46,6 +46,7 @@ var ArrayField = React.createClass({
 				value: this.props.value[i],
 				key: i,
 				name: i,
+				id: this.props.id,
 				definition: definition,
 				onUpdated: this.updateField,
 				onDeleted: this.deleteField,

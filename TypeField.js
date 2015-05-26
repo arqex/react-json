@@ -31,6 +31,7 @@ var TypeField = React.createClass({
 			value: this.props.value,
 			settings: settings,
 			onUpdated: this.props.onUpdated,
+			id: this.props.id,
 			ref: 'field'
 		});
 	},

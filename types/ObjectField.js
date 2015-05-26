@@ -67,6 +67,7 @@ var ObjectField = React.createClass({
 			key: key,
 			name: key,
 			ref: key,
+			id: this.props.id,
 			definition: definition,
 			onUpdated: this.updateField,
 			onDeleted: this.deleteField,

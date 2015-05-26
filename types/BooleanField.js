@@ -14,6 +14,7 @@ var BooleanField = React.createClass({
 		return React.DOM.input({
 			type: "checkbox",
 			className: className,
+			id: this.props.id,
 			checked: this.props.value,
 			onChange: this.updateValue
 		});

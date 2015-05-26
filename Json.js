@@ -58,7 +58,8 @@ var Json = React.createClass({
 
 		return {
 			value: value,
-			defaults: this.createDefaults()
+			defaults: this.createDefaults(),
+			id: this.getId()
 		};
 	},
 
@@ -83,7 +84,8 @@ var Json = React.createClass({
 					order: settings.order
 				}),
 				ref: 'value',
-				defaults: this.state.defaults
+				defaults: this.state.defaults,
+				id: this.state.id
 			})
 		;
 
@@ -123,6 +125,10 @@ var Json = React.createClass({
 		}
 
 		return defaults;
+	},
+
+	getId: function(){
+		return btoa( parseInt( Math.random() * 10000 ) ).replace(/=/g, '');
 	}
 });
 

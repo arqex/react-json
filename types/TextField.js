@@ -24,6 +24,7 @@ var TextField = React.createClass({
 
 		return React.DOM.textarea({
 			value: this.state.value,
+			id: this.props.id,
 			onChange: this.updateValue,
 			placeholder: this.props.settings.placeholder || '',
 			onBlur: this.setValue,
