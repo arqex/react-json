@@ -78,9 +78,9 @@ var Json = React.createClass({
 				value: this.state.value,
 				settings: objectAssign( {}, this.state.defaults.object, {
 					fields: settings.fields,
-					editing: settings.editing,
-					fixedFields: settings.fixedFields,
-					adder: settings.adder,
+					editing: this.getFormSetting( settings, 'editing', 'always'),
+					fixedFields: this.getFormSetting( settings, 'editing', true),
+					adder:  this.getFormSetting( settings, 'editing', false),
 					header: false,
 					order: settings.order
 				}),
@@ -130,6 +130,13 @@ var Json = React.createClass({
 
 	getId: function(){
 		return btoa( parseInt( Math.random() * 10000 ) ).replace(/=/g, '');
+	},
+
+	getFormSetting: function( settings, field, def ){
+		if( typeof settings[ field ] != 'undefined' )
+			return settings[ field ];
+		if( settings.form )
+			return def;
 	}
 });
 
