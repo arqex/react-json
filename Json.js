@@ -79,7 +79,8 @@ var Json = React.createClass({
 				settings: objectAssign( {}, this.state.defaults.object, {
 					fields: settings.fields,
 					editing: settings.editing,
-					extensible: settings.extensible,
+					fixedFields: settings.fixedFields,
+					adder: settings.adder,
 					header: false,
 					order: settings.order
 				}),

@@ -31,16 +31,19 @@ var ArrayField = React.createClass({
 		var settings = this.props.settings,
 			className = this.state.editing ? 'open jsonArray jsonCompound' : 'jsonArray jsonCompound',
 			openArray = '',
+			fixedFields = this.getFixedFields(),
 			definitions = this.state.fields
 		;
 
 		var attrs = [],
-			definition
+			definition, fixed
 		;
 		for (var i = 0; i < this.props.value.length; i++) {
 			definition = definitions[ i ] || {};
 			if( !definition.settings )
 				definition.settings = {};
+
+			fixed = fixedFields === true || typeof fixedFields == 'object' && fixedFields[ i ];
 
 			attrs.push( React.createElement( Field, {
 				value: this.props.value[i],
@@ -48,6 +51,7 @@ var ArrayField = React.createClass({
 				name: i,
 				id: this.props.id,
 				definition: definition,
+				fixed: fixed,
 				onUpdated: this.updateField,
 				onDeleted: this.deleteField,
 				parentSettings: this.props.settings

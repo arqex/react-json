@@ -17,10 +17,10 @@
 .jsonCompound.open > .jsonChildren {
   display: block;
 }
-.jsonPropertyAdder {
+.jsonFieldAdder {
   margin-left: 13px;
 }
-.jsonPropertyAdder select {
+.jsonFieldAdder select {
   margin-left: 5px;
 }
 .compoundToggle:before {
@@ -35,6 +35,7 @@
 
 .jsonName {
   font-style: italic;
+  text-align: right;
 }
 
 .jsonValue {
@@ -47,10 +48,12 @@
 	margin-bottom: 5px;
 }
 
-.jsonRemove {
+.jsonRemove, .jsonFixed {
   visibility: hidden;
   margin-right: 5px;
   text-decoration: none;
+  width: .6em;
+  display: inline-block;
 }
 
 .jsonName:hover > .jsonRemove {
@@ -69,11 +72,11 @@ pre {
   cursor: pointer;
 }
 
-.booleanProperty * {
+.booleanField * {
 	vertical-align: middle;
 }
 
-.booleanProperty input {
+.booleanField input {
 	margin-bottom: 0;
 }
 
@@ -94,3 +97,4 @@ pre {
 .jsonError > .jsonValue textarea {
 	background-color: #fff8f8;
 }
+

@@ -39,10 +39,19 @@ var Field = React.createClass({
 			error = React.DOM.span({ key:'e', className: 'jsonErrorMsg' }, this.state.error );
 		}
 
+		var jsonName = [ React.DOM.label({ key: 's1', htmlFor: id }, (definition.title || this.props.name) + ':' ) ];
+
+		if( this.props.fixed ){
+			// If the field cannot be removed, add a placeholder to maintain the design
+			jsonName.unshift( React.DOM.span({ key:'f', className: 'jsonFixed' }) );
+		}
+		else{
+			jsonName.unshift( React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x') );
+		}
+
 		return React.DOM.div({className: className}, [
 			React.DOM.span( {className: 'jsonName', key: 'n'}, [
-				React.DOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x'),
-				React.DOM.label({ key: 's1', htmlFor: id }, (definition.title || this.props.name) + ':' )
+				jsonName
 			]),
 			React.DOM.span( {className: 'jsonValue', key: 'v'}, [
 				React.DOM.span({key:'s2'}, typeField )

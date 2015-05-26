@@ -35,11 +35,12 @@ var ObjectField = React.createClass({
 			definitions = this.state.fields,
 			attrs = [],
 			value = assign({}, this.props.value ),
+			fixedFields = this.getFixedFields(),
 			definition
 		;
 
 		this.getFieldOrder().forEach( function( fieldName ){
-			attrs.push( me.renderField( fieldName ));
+			attrs.push( me.renderField( fieldName, fixedFields ));
 		});
 
 		var openHashChildren = [ attrs ];
@@ -54,9 +55,10 @@ var ObjectField = React.createClass({
 		]);
 	},
 
-	renderField: function( key ){
+	renderField: function( key, fixedFields ){
 		var value = this.props.value[ key ],
-			definition = this.state.fields[ key ] || {}
+			definition = this.state.fields[ key ] || {},
+			fixed = fixedFields === true || typeof fixedFields == 'object' && fixedFields[ key ]
 		;
 
 		if( !definition.settings )
@@ -67,6 +69,7 @@ var ObjectField = React.createClass({
 			key: key,
 			name: key,
 			ref: key,
+			fixed: fixed,
 			id: this.props.id,
 			definition: definition,
 			onUpdated: this.updateField,

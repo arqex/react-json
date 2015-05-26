@@ -92,5 +92,18 @@ module.exports = {
 			fields[key].settings.editing = false;
 			this.setState( {fields: fields} );
 		}
+	},
+
+	getFixedFields: function(){
+		var fields = this.props.settings.fixedFields,
+			fixed = {}
+		;
+		if( fields && fields.constructor == Array ){
+			fields.forEach( function( f ){
+				fixed[ f ] = 1;
+			});
+			return fixed;
+		}
+		return fields;
 	}
 };
