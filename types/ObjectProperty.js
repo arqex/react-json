@@ -75,7 +75,7 @@ var ObjectProperty = React.createClass({
 	},
 
 	getDefaultHeader: function(){
-		return 'Map [' + Object.keys( this.props.value ) + ']';
+		return 'Map [' + Object.keys( this.props.value ).length + ']';
 	},
 
 	getDefaultAdder: function(){

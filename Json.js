@@ -71,7 +71,7 @@ var Json = React.createClass({
 	},
 
 	render: function(){
-		var settings = this.props.settings,
+		var settings = this.props.settings || {},
 			ob = React.createElement( TypeProperty, {
 				type: 'object',
 				value: this.state.value,
@@ -112,8 +112,9 @@ var Json = React.createClass({
 		return settings;
 	},
 	createDefaults: function(){
-		var components = TypeProperty.prototype.components,
-			propDefaults = this.props.settings.defaults || {},
+		var settings = this.props.settings || {},
+			components = TypeProperty.prototype.components,
+			propDefaults = settings.defaults || {},
 			defaults = {}
 		;
 
