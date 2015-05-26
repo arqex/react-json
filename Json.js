@@ -16,14 +16,14 @@ var React = require('react'),
 /**
  * The main component. It will refresh the props when the store changes.
  *
- * @param  {FreezerNode} store  Freezer node that contains a json property with the data
- * @param  {FreezerNode} original Freezer node to compare with the current data
+ * @prop  {Object|FreezerNode} value The JSON object, value of the form.
+ * @prop  {Object} settings Customization settings
  */
 var Json = React.createClass({
 
 	getDefaultProps: function(){
 		return {
-			doc: {},
+			value: {},
 			errors: false
 		};
 	},
@@ -40,49 +40,49 @@ var Json = React.createClass({
 
 	getInitialState: function(){
 		var me = this,
-			doc = this.props.doc,
+			value = this.props.value,
 			listener
 		;
 
 		// If it is a freezer node
-		if( !doc.getListener )
-			doc = new Freezer( doc ).get();
+		if( !value.getListener )
+			value = new Freezer( value ).get();
 
 		// Listen to changes
-		doc.getListener().on('update', function( updated ){
-			me.setState({doc: updated});
+		value.getListener().on('update', function( updated ){
+			me.setState({value: updated});
 
 			if( me.state.errors )
 				me.getValidationErrors();
 		});
 
 		return {
-			doc: doc,
+			value: value,
 			defaults: this.createDefaults()
 		};
 	},
 
 	componentWillReceiveProps: function( newProps ){
-		if( !newProps.doc.getListener ){
-			this.setState({doc: this.state.doc.reset( newProps.doc )});
+		if( !newProps.value.getListener ){
+			this.setState({value: this.state.value.reset( newProps.value )});
 		}
 
 		this.setState( {defaults: this.createDefaults()} );
 	},
 
 	render: function(){
-		var definition = this.props.definition,
+		var settings = this.props.settings,
 			ob = React.createElement( TypeProperty, {
 				type: 'object',
-				value: this.state.doc,
+				value: this.state.value,
 				settings: objectAssign( {}, this.state.defaults.object, {
-					properties: definition.properties,
-					editing: definition.editing,
-					extensible: definition.extensible,
+					properties: settings.properties,
+					editing: settings.editing,
+					extensible: settings.extensible,
 					header: false,
-					order: definition.order
+					order: settings.order
 				}),
-				ref: 'doc',
+				ref: 'value',
 				defaults: this.state.defaults
 			})
 		;
@@ -91,12 +91,12 @@ var Json = React.createClass({
 	},
 
 	getValue: function(){
-		return this.state.doc.toJS();
+		return this.state.value.toJS();
 	},
 
 	getValidationErrors: function(){
 		var jsonValue = this.getValue(),
-			errors = this.refs.doc.getValidationErrors( jsonValue )
+			errors = this.refs.value.getValidationErrors( jsonValue )
 		;
 
 		this.setState( {errors: errors.length} );
@@ -113,7 +113,7 @@ var Json = React.createClass({
 	},
 	createDefaults: function(){
 		var components = TypeProperty.prototype.components,
-			propDefaults = this.props.definition.defaults || {},
+			propDefaults = this.props.settings.defaults || {},
 			defaults = {}
 		;
 
