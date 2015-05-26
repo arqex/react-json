@@ -1,9 +1,5 @@
 
 /* JSON Editor */
-.jsonEditor > .jsonObject {
-  float: left;
-}
-
 .jsonEditor * {
 	vertical-align: top;
 }
