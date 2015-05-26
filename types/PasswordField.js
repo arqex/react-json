@@ -1,5 +1,5 @@
 var React = require('react'),
-	LeafMixin = require('../mixins/LeafPropertyMixin')
+	LeafMixin = require('../mixins/LeafFieldMixin')
 ;
 
 
@@ -9,7 +9,7 @@ var React = require('react'),
  * @param  {Mixed} original The value of the component it the original json.
  * @param {FreezerNode} parent The parent node to let the password component update its value.
  */
-var PasswordAttribute = React.createClass({
+var PasswordField = React.createClass({
 	mixins: [LeafMixin],
 	typeClass: 'jsonPassword',
 	inputType: 'password',
@@ -44,4 +44,4 @@ var PasswordAttribute = React.createClass({
 	}
 });
 
-module.exports = PasswordAttribute;
+module.exports = PasswordField;

@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react'),
-	Property = require('../Property'),
+	Field = require('../Field'),
 	assign = require('object-assign'),
-	CompoundPropertyMixin = require('../mixins/CompoundPropertyMixin')
+	CompoundFieldMixin = require('../mixins/CompoundFieldMixin')
 ;
 
 /**
@@ -11,8 +11,8 @@ var React = require('react'),
  * @param  {FreezerNode} value The value of the array.
  * @param  {Mixed} original The value of the component it the original json.
  */
-var ArrayProperty = React.createClass({
-	mixins: [CompoundPropertyMixin],
+var ArrayField = React.createClass({
+	mixins: [CompoundFieldMixin],
 
 	getInitialState: function(){
 		return this.getStateFromProps( this.props );
@@ -21,7 +21,7 @@ var ArrayProperty = React.createClass({
 	getStateFromProps: function( props ){
 		return {
 			editing: props.settings.editing || false,
-			properties: this.state && this.state.properties || {}
+			fields: this.state && this.state.fields || {}
 		};
 	},
 
@@ -31,7 +31,7 @@ var ArrayProperty = React.createClass({
 		var settings = this.props.settings,
 			className = this.state.editing ? 'open jsonArray jsonCompound' : 'jsonArray jsonCompound',
 			openArray = '',
-			definitions = this.state.properties
+			definitions = this.state.fields
 		;
 
 		var attrs = [],
@@ -42,13 +42,13 @@ var ArrayProperty = React.createClass({
 			if( !definition.settings )
 				definition.settings = {};
 
-			attrs.push( React.createElement( Property, {
+			attrs.push( React.createElement( Field, {
 				value: this.props.value[i],
 				key: i,
 				name: i,
 				definition: definition,
-				onUpdated: this.updateProperty,
-				onDeleted: this.deleteProperty,
+				onUpdated: this.updateField,
+				onDeleted: this.deleteField,
 				parentSettings: this.props.settings
 			}));
 		}
@@ -74,26 +74,26 @@ var ArrayProperty = React.createClass({
 		return '+ Add element';
 	},
 
-	updateProperty: function( key, value ){
+	updateField: function( key, value ){
 		this.checkEditingSetting( key );
 		this.props.value.set( key, value );
 	},
 
-	deleteProperty: function( key ){
-		var properties = {};
+	deleteField: function( key ){
+		var fields = {};
 
-		for( var index in this.state.properties ){
+		for( var index in this.state.fields ){
 			if( index > key ){
-				properties[ index - 1 ] = this.state.properties[ index ];
+				fields[ index - 1 ] = this.state.fields[ index ];
 			}
 			else if( index < key ){
-				properties[ index ] = this.state.properties[ index ];
+				fields[ index ] = this.state.fields[ index ];
 			}
 			// If they are equal we are deleting the element, do nothing
 		}
 
 		this.props.value.splice( key, 1 );
-		this.setState( { properties: properties } );
+		this.setState( { fields: fields } );
 	},
 
 	isType: function( value ){
@@ -101,4 +101,4 @@ var ArrayProperty = React.createClass({
 	}
 });
 
-module.exports = ArrayProperty;
+module.exports = ArrayField;

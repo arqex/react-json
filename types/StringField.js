@@ -1,6 +1,7 @@
 var React = require('react'),
-	LeafMixin = require('../mixins/LeafPropertyMixin')
+	LeafMixin = require('../mixins/LeafFieldMixin')
 ;
+
 
 /**
  * Component for editing a string.
@@ -8,8 +9,10 @@ var React = require('react'),
  * @param  {Mixed} original The value of the component it the original json.
  * @param {FreezerNode} parent The parent node to let the string component update its value.
  */
-var TextAttribute = React.createClass({
+var StringField = React.createClass({
 	mixins: [LeafMixin],
+	typeClass: 'jsonString',
+	inputType: 'text',
 	defaultValue: '',
 
 	getInitialState: function(){
@@ -17,18 +20,7 @@ var TextAttribute = React.createClass({
 	},
 
 	render: function(){
-		var className = 'jsonText';
-
-		if( !this.state.editing )
-			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
-
-		return React.DOM.textarea({
-			value: this.state.value,
-			onChange: this.updateValue,
-			placeholder: this.props.settings.placeholder || '',
-			onBlur: this.setValue,
-			ref: 'input'
-		});
+		return this.renderInput();
 	},
 
 	updateValue: function( e ){
@@ -36,8 +28,8 @@ var TextAttribute = React.createClass({
 	},
 
 	isType: function( value ){
-		return typeof value == 'string' && value.length > 100;
+		return typeof value != 'object';
 	}
 });
 
-module.exports = TextAttribute;
+module.exports = StringField;

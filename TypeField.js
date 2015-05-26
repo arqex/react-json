@@ -8,7 +8,7 @@ var React = require('react'),
 var components = {};
 var typeCheckOrder = [];
 
-var TypeProperty = React.createClass({
+var TypeField = React.createClass({
 	components: {},
 	typeCheckOrder: [],
 
@@ -31,7 +31,7 @@ var TypeProperty = React.createClass({
 			value: this.props.value,
 			settings: settings,
 			onUpdated: this.props.onUpdated,
-			ref: 'property'
+			ref: 'field'
 		});
 	},
 
@@ -40,7 +40,7 @@ var TypeProperty = React.createClass({
 		if( !type )
 			type = this.guessType( this.props.value );
 
-		this.propertyType = type;
+		this.fieldType = type;
 
 		return this.components[ type ];
 	},
@@ -62,7 +62,7 @@ var TypeProperty = React.createClass({
 	},
 
 	getValidationErrors: function( jsonValue ){
-		return this.refs.property.getValidationErrors( jsonValue );
+		return this.refs.field.getValidationErrors( jsonValue );
 	},
 
 	addDeepSettings: function( settings ){
@@ -78,11 +78,11 @@ var TypeProperty = React.createClass({
  	}
 });
 
-TypeProperty.registerType = function( name, Component, selectable ){
-	var proto = TypeProperty.prototype;
+TypeField.registerType = function( name, Component, selectable ){
+	var proto = TypeField.prototype;
 	proto.components[ name ] = Component;
 	if( selectable )
 		proto.typeCheckOrder.unshift( name );
 };
 
-module.exports = TypeProperty;
+module.exports = TypeField;

@@ -4,7 +4,7 @@ var React = require('react');
  * Component for editing a boolean.
  * @param  {string} value The value of the boolean.
  */
-var BooleanAttribute = React.createClass({
+var BooleanField = React.createClass({
 
 	defaultValue: false,
 
@@ -38,4 +38,4 @@ var BooleanAttribute = React.createClass({
 	}
 });
 
-module.exports = BooleanAttribute;
+module.exports = BooleanField;

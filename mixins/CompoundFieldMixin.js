@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react'),
-	PropertyAdder = require('../PropertyAdder'),
+	FieldAdder = require('../FieldAdder'),
 	assign = require('object-assign')
 ;
 
@@ -54,26 +54,26 @@ module.exports = {
 			adder = settingsAdder;
 		}
 
-		return React.createElement( PropertyAdder, {
-			onCreate: this.createProperty,
+		return React.createElement( FieldAdder, {
+			onCreate: this.createField,
 			name: name,
 			key: 'add',
 			text: adder
 		});
 	},
 
-	createProperty: function( key, value, definition ){
+	createField: function( key, value, definition ){
 
 		if( this.props.value[ key ] )
-			return console.log( 'Property ' + key + ' already exists.');
+			return console.log( 'Field ' + key + ' already exists.');
 
 		// Start editing
 		definition.settings = {editing: this.state.editing == 'always' ? 'always' : true };
 
-		var properties = assign( {}, this.state.properties );
-		properties[ key ] = definition;
+		var fields = assign( {}, this.state.fields );
+		fields[ key ] = definition;
 
-		this.setState({properties: properties});
+		this.setState({fields: fields});
 		this.props.value.set( key, value );
 	},
 
@@ -86,11 +86,11 @@ module.exports = {
 	 * @param  {String} key The child key
 	 */
 	checkEditingSetting: function( key ){
-		var properties = this.state.properties;
-		if( properties[ key ] && properties[ key ].settings.editing === true ){
-			properties = assign({}, properties);
-			properties[key].settings.editing = false;
-			this.setState( {properties: properties} );
+		var fields = this.state.fields;
+		if( fields[ key ] && fields[ key ].settings.editing === true ){
+			fields = assign({}, fields);
+			fields[key].settings.editing = false;
+			this.setState( {fields: fields} );
 		}
 	}
 };

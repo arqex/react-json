@@ -1,5 +1,5 @@
 var React = require('react'),
-	AttributeCreator = require('../AttributeCreator')
+	FieldCreator = require('../FieldCreator')
 ;
 
 /**
@@ -8,7 +8,7 @@ var React = require('react'),
  * @param  {Mixed} original The value of the component it the original json.
  * @param {FreezerNode} parent The parent node to let the string component update its value.
  */
-var NullAttribute = React.createClass({
+var NullField = React.createClass({
 	getInitialState: function(){
 		return {
 			editing: !this.props.value,
@@ -24,7 +24,7 @@ var NullAttribute = React.createClass({
 		if( !this.state.editing )
 			return <span onClick={ this.setEditMode } className={ className }>null</span>;
 
-		return <AttributeCreator type="null" onCreate={ this.onTypeSelected } onCancel={ this.onCancel } />;
+		return <FieldCreator type="null" onCreate={ this.onTypeSelected } onCancel={ this.onCancel } />;
 	},
 
 	setEditMode: function(){
@@ -44,4 +44,4 @@ var NullAttribute = React.createClass({
 	}
 });
 
-module.exports = NullAttribute;
+module.exports = NullField;

@@ -1,5 +1,5 @@
 var React = require('react'),
-	LeafMixin = require('../mixins/LeafPropertyMixin')
+	LeafMixin = require('../mixins/LeafFieldMixin')
 ;
 
 /**
@@ -8,7 +8,7 @@ var React = require('react'),
  * @param  {Mixed} original The value of the component it the original json.
  * @param {FreezerNode} parent The parent node to let the string component update its value.
  */
-var NumberAttribute = React.createClass({
+var NumberField = React.createClass({
 	mixins: [LeafMixin],
 	typeClass: 'jsonNumber',
 	inputType: 'number',
@@ -31,4 +31,4 @@ var NumberAttribute = React.createClass({
 	}
 });
 
-module.exports = NumberAttribute;
+module.exports = NumberField;

@@ -1,14 +1,14 @@
 var React = require('react'),
 	Freezer = require('freezer-js'),
 	objectAssign = require('object-assign'),
-	TypeProperty = require('./TypeProperty'),
-	ObjectProperty = require('./types/ObjectProperty'),
-	ArrayProperty = require('./types/ArrayProperty'),
-	StringProperty = require('./types/StringProperty'),
-	BooleanProperty = require('./types/BooleanProperty'),
-	NumberProperty = require('./types/NumberProperty'),
-	TextProperty = require('./types/TextProperty'),
-	PasswordProperty = require('./types/PasswordProperty'),
+	TypeField = require('./TypeField'),
+	ObjectField = require('./types/ObjectField'),
+	ArrayField = require('./types/ArrayField'),
+	StringField = require('./types/StringField'),
+	BooleanField = require('./types/BooleanField'),
+	NumberField = require('./types/NumberField'),
+	TextField = require('./types/TextField'),
+	PasswordField = require('./types/PasswordField'),
 	deepSettings = require('./deepSettings')
 ;
 
@@ -72,11 +72,11 @@ var Json = React.createClass({
 
 	render: function(){
 		var settings = this.props.settings || {},
-			ob = React.createElement( TypeProperty, {
+			ob = React.createElement( TypeField, {
 				type: 'object',
 				value: this.state.value,
 				settings: objectAssign( {}, this.state.defaults.object, {
-					properties: settings.properties,
+					fields: settings.fields,
 					editing: settings.editing,
 					extensible: settings.extensible,
 					header: false,
@@ -113,7 +113,7 @@ var Json = React.createClass({
 	},
 	createDefaults: function(){
 		var settings = this.props.settings || {},
-			components = TypeProperty.prototype.components,
+			components = TypeField.prototype.components,
 			propDefaults = settings.defaults || {},
 			defaults = {}
 		;
@@ -127,15 +127,15 @@ var Json = React.createClass({
 });
 
 // Add global modifier functions
-Json.registerType = TypeProperty.registerType.bind( TypeProperty );
+Json.registerType = TypeField.registerType.bind( TypeField );
 
 // Register basic types
-Json.registerType( 'object', ObjectProperty );
-Json.registerType( 'array', ArrayProperty, true );
-Json.registerType( 'string', StringProperty, true );
-Json.registerType( 'text', TextProperty, true );
-Json.registerType( 'number', NumberProperty, true );
-Json.registerType( 'boolean', BooleanProperty, true );
-Json.registerType( 'password', PasswordProperty, true );
+Json.registerType( 'object', ObjectField );
+Json.registerType( 'array', ArrayField, true );
+Json.registerType( 'string', StringField, true );
+Json.registerType( 'text', TextField, true );
+Json.registerType( 'number', NumberField, true );
+Json.registerType( 'boolean', BooleanField, true );
+Json.registerType( 'password', PasswordField, true );
 
 module.exports = Json;

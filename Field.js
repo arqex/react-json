@@ -3,17 +3,17 @@
 var React = require('react'),
 	objectAssign = require('object-assign'),
 	Validation = require('./validation'),
-	TypeProperty = require('./TypeProperty')
+	TypeField = require('./TypeField')
 ;
 
 /**
- * Property component that represent each Array element or Object property.
+ * Field component that represent each Array element or Object field.
  * @param  {string} name The key of the attribute in the parent.
  * @param  {Mixed} value The value of the attribute.
  * @param {Mixed} original The value of the attibute in the original json to highlight the changes.
  * @param {FreezerNode} parent The parent node to notify attribute updates.
  */
-var Property = React.createClass({
+var Field = React.createClass({
 
 	getInitialState: function(){
 		return {error: false};
@@ -25,13 +25,13 @@ var Property = React.createClass({
 	},
 	render: function(){
 		var definition = this.props.definition || {},
-			className = 'jsonProperty',
-			type = definition.type || TypeProperty.prototype.guessType( this.props.value ),
-			typeProperty = this.renderTypeProperty( type ),
+			className = 'jsonField',
+			type = definition.type || TypeField.prototype.guessType( this.props.value ),
+			typeField = this.renderTypeField( type ),
 			error = ''
 		;
 
-		className += ' ' + type + 'Property';
+		className += ' ' + type + 'Field';
 
 		if( this.state.error ){
 			className += ' jsonError';
@@ -44,27 +44,27 @@ var Property = React.createClass({
 				React.DOM.span({ key: 's1' }, (definition.title || this.props.name) + ':' )
 			]),
 			React.DOM.span( {className: 'jsonValue', key: 'v'}, [
-				React.DOM.span({key:'s2'}, typeProperty )
+				React.DOM.span({key:'s2'}, typeField )
 			]),
 			error
 		]);
 	},
 
-	renderTypeProperty: function( type ){
+	renderTypeField: function( type ){
 		var definition = this.props.definition || {},
 			settings = objectAssign( {}, definition.settings || {} ),
 			component
 		;
 
-		if( definition.properties )
-			settings.properties = definition.properties;
+		if( definition.fields )
+			settings.fields = definition.fields;
 
-		component = React.createElement( TypeProperty, {
+		component = React.createElement( TypeField, {
 			type: type,
 			value: this.props.value,
 			settings: settings,
 			onUpdated: this.onUpdated,
-			ref: 'typeProperty',
+			ref: 'typeField',
 			parentSettings: this.props.parentSettings
 		});
 		return component;
@@ -86,11 +86,11 @@ var Property = React.createClass({
 		var childErrors = [],
 			validates = this.props.definition.validates,
 			name = this.props.name,
-			property = this.refs.typeProperty
+			field = this.refs.typeField
 		;
 
-		if( property.propertyType == 'object' ){
-			childErrors = property.getValidationErrors( jsonValue );
+		if( field.fieldType == 'object' ){
+			childErrors = field.getValidationErrors( jsonValue );
 			childErrors.forEach( function( error ){
 				if( !error.path )
 					error.path = name;
@@ -125,4 +125,4 @@ var Property = React.createClass({
 	}
 });
 
-module.exports = Property;
+module.exports = Field;

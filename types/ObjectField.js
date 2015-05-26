@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react'),
-	Property = require('../Property'),
+	Field = require('../Field'),
 	assign = require('object-assign'),
-	CompoundPropertyMixin = require('../mixins/CompoundPropertyMixin')
+	CompoundFieldMixin = require('../mixins/CompoundFieldMixin')
 ;
 
 /**
@@ -11,8 +11,8 @@ var React = require('react'),
  * @param  {FreezerNode} value The value of the object.
  * @param  {Mixed} original The value of the component it the original json.
  */
-var ObjectProperty = React.createClass({
-	mixins: [CompoundPropertyMixin],
+var ObjectField = React.createClass({
+	mixins: [CompoundFieldMixin],
 
 	getInitialState: function(){
 		return this.getStateFromProps( this.props );
@@ -21,7 +21,7 @@ var ObjectProperty = React.createClass({
 	getStateFromProps: function( props ){
 		return {
 			editing: props.settings.editing || false,
-			properties: assign({}, props.settings && props.settings.properties || {})
+			fields: assign({}, props.settings && props.settings.fields || {})
 		};
 	},
 
@@ -32,14 +32,14 @@ var ObjectProperty = React.createClass({
 			settings = this.props.settings,
 			className = this.state.editing || settings.header === false ? 'open jsonObject jsonCompound' : 'jsonObject jsonCompound',
 			openHash = '',
-			definitions = this.state.properties,
+			definitions = this.state.fields,
 			attrs = [],
 			value = assign({}, this.props.value ),
 			definition
 		;
 
-		this.getPropertyOrder().forEach( function( propertyName ){
-			attrs.push( me.renderProperty( propertyName ));
+		this.getFieldOrder().forEach( function( fieldName ){
+			attrs.push( me.renderField( fieldName ));
 		});
 
 		var openHashChildren = [ attrs ];
@@ -54,22 +54,22 @@ var ObjectProperty = React.createClass({
 		]);
 	},
 
-	renderProperty: function( key ){
+	renderField: function( key ){
 		var value = this.props.value[ key ],
-			definition = this.state.properties[ key ] || {}
+			definition = this.state.fields[ key ] || {}
 		;
 
 		if( !definition.settings )
 			definition.settings = {};
 
-		return React.createElement( Property, {
+		return React.createElement( Field, {
 			value: value,
 			key: key,
 			name: key,
 			ref: key,
 			definition: definition,
-			onUpdated: this.updateProperty,
-			onDeleted: this.deleteProperty,
+			onUpdated: this.updateField,
+			onDeleted: this.deleteField,
 			parentSettings: this.props.settings
 		});
 	},
@@ -79,15 +79,15 @@ var ObjectProperty = React.createClass({
 	},
 
 	getDefaultAdder: function(){
-		return '+ Add property';
+		return '+ Add field';
 	},
 
-	updateProperty: function( key, value ){
+	updateField: function( key, value ){
 		this.checkEditingSetting( key );
 		this.props.value.set( key, value );
 	},
 
-	deleteProperty: function( key ){
+	deleteField: function( key ){
 		this.props.value.remove( key );
 	},
 
@@ -106,7 +106,7 @@ var ObjectProperty = React.createClass({
 		return errors;
 	},
 
-	getPropertyOrder: function(){
+	getFieldOrder: function(){
 		var settingsOrder = this.props.settings.order,
 			orderType = typeof settingsOrder
 		;
@@ -121,7 +121,7 @@ var ObjectProperty = React.createClass({
 		if( orderType == 'function' )
 			return settingsOrder( value );
 
-		// Add properties in the array
+		// Add fields in the array
 		if( settingsOrder.constructor === Array ){
 			settingsOrder.forEach( function( name ){
 				if( typeof value[ name ] != 'undefined' ){
@@ -143,4 +143,4 @@ var ObjectProperty = React.createClass({
 	}
 });
 
-module.exports = ObjectProperty;
+module.exports = ObjectField;
