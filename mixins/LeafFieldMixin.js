@@ -31,6 +31,10 @@ module.exports = {
 	getDisplayString: function(){
 		if( this.getDisplayModeString )
 			return this.getDisplayModeString();
+
+		if( this.props.value === '' )
+			return React.DOM.span( {className: 'jsonNovalue'}, 'No value' );
+
 		return this.props.value;
 	},
 

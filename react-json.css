@@ -94,3 +94,8 @@ pre {
 	background-color: #fff8f8;
 }
 
+.jsonNovalue {
+	color: #999;
+	font-style: italic;
+}
+
