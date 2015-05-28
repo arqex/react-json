@@ -109,6 +109,9 @@ var Field = React.createClass({
 			field = this.refs.typeField
 		;
 
+		if( !field )
+			return [];
+
 		if( field.fieldType == 'object' ){
 			childErrors = field.getValidationErrors( jsonValue );
 			childErrors.forEach( function( error ){

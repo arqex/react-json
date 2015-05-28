@@ -49,11 +49,13 @@ var TypeField = React.createClass({
 	guessType: function( value ){
 		var type = false,
 			i = 0,
-			types = this.typeCheckOrder
+			types = this.typeCheckOrder,
+			component
 		;
 
 		while( !type && i < types.length ){
-			if( this.components[ types[i] ].prototype.isType( value ) )
+			component = this.components[ types[i] ].prototype;
+			if( component.isType && component.isType( value ) )
 				type = types[i++];
 			else
 				i++;

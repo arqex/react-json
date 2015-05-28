@@ -20,11 +20,6 @@ var BooleanField = React.createClass({
 		});
 	},
 
-	setValue: function(){
-		this.setState({editing: false});
-		this.props.onUpdated( this.state.value );
-	},
-
 	updateValue: function( e ){
 		this.props.onUpdated( e.target.checked );
 	},

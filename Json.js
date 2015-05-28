@@ -9,6 +9,7 @@ var React = require('react'),
 	NumberField = require('./src/types/NumberField'),
 	TextField = require('./src/types/TextField'),
 	PasswordField = require('./src/types/PasswordField'),
+	SelectField = require('./src/types/SelectField'),
 	deepSettings = require('./src/deepSettings')
 ;
 
@@ -151,5 +152,6 @@ Json.registerType( 'text', TextField, true );
 Json.registerType( 'number', NumberField, true );
 Json.registerType( 'boolean', BooleanField, true );
 Json.registerType( 'password', PasswordField );
+Json.registerType( 'select', SelectField );
 
 module.exports = Json;
