@@ -3,7 +3,7 @@
 var React = require('react'),
 	Field = require('../Field'),
 	assign = require('object-assign'),
-	CompoundFieldMixin = require('../mixins/CompoundFieldMixin')
+	CompoundFieldMixin = require('../../mixins/CompoundFieldMixin')
 ;
 
 /**

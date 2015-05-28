@@ -1,5 +1,5 @@
 var React = require('react'),
-	LeafMixin = require('../mixins/LeafFieldMixin')
+	LeafMixin = require('../../mixins/LeafFieldMixin')
 ;
 
 /**

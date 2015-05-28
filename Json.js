@@ -1,15 +1,15 @@
 var React = require('react'),
 	Freezer = require('freezer-js'),
 	objectAssign = require('object-assign'),
-	TypeField = require('./TypeField'),
-	ObjectField = require('./types/ObjectField'),
-	ArrayField = require('./types/ArrayField'),
-	StringField = require('./types/StringField'),
-	BooleanField = require('./types/BooleanField'),
-	NumberField = require('./types/NumberField'),
-	TextField = require('./types/TextField'),
-	PasswordField = require('./types/PasswordField'),
-	deepSettings = require('./deepSettings')
+	TypeField = require('./src/TypeField'),
+	ObjectField = require('./src/types/ObjectField'),
+	ArrayField = require('./src/types/ArrayField'),
+	StringField = require('./src/types/StringField'),
+	BooleanField = require('./src/types/BooleanField'),
+	NumberField = require('./src/types/NumberField'),
+	TextField = require('./src/types/TextField'),
+	PasswordField = require('./src/types/PasswordField'),
+	deepSettings = require('./src/deepSettings')
 ;
 
 

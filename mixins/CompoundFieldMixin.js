@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react'),
-	FieldAdder = require('../FieldAdder'),
+	FieldAdder = require('../src/FieldAdder'),
 	assign = require('object-assign')
 ;
 
