@@ -36,11 +36,16 @@ var ObjectField = React.createClass({
 			attrs = [],
 			value = assign({}, this.props.value ),
 			fixedFields = this.getFixedFields(),
+			groupCount = 0,
 			definition
 		;
 
-		this.getFieldOrder().forEach( function( fieldName ){
-			attrs.push( me.renderField( fieldName, fixedFields ));
+		this.getFieldOrder().forEach( function( field ){
+			// If the field is an array handle grouping
+			if( field.constructor === Array )
+				attrs.push( me.renderGroup( field, fixedFields, ++groupCount ) );
+			else
+				attrs.push( me.renderField( field, fixedFields ) );
 		});
 
 		var openHashChildren = [ attrs ];
@@ -78,6 +83,18 @@ var ObjectField = React.createClass({
 		});
 	},
 
+	renderGroup: function( fieldNames, fixedFields, groupNumber ){
+		var me = this,
+			fields = []
+		;
+
+		fieldNames.forEach( function( field ){
+			fields.push( me.renderField( field, fixedFields ) );
+		});
+
+		return React.DOM.div({ className: 'jsonGroup jsonGroup_' + groupNumber }, fields );
+	},
+
 	getDefaultHeader: function(){
 		return 'Map [' + Object.keys( this.props.value ).length + ']';
 	},
@@ -111,9 +128,11 @@ var ObjectField = React.createClass({
 	},
 
 	getFieldOrder: function(){
-		var settingsOrder = this.props.settings.order,
+		var me = this,
+			settingsOrder = this.props.settings.order,
 			orderType = typeof settingsOrder,
-			fields = this.props.settings.fields || {}
+			fields = this.props.settings.fields || {},
+			group
 		;
 
 		if( !settingsOrder || (orderType != 'function' && settingsOrder.constructor !== Array) )
@@ -128,12 +147,27 @@ var ObjectField = React.createClass({
 
 		// Add fields in the array
 		if( settingsOrder.constructor === Array ){
-			settingsOrder.forEach( function( name ){
-				if( typeof value[ name ] != 'undefined' || fields[ name ] && fields[ name ].type == 'react' ){
-					order.push( name );
+			settingsOrder.forEach( function( field ){
+
+				// An array, handle group
+				if( field.constructor == Array ){
+					group = [];
+					field.forEach( function( groupField ){
+						if( me.addFieldToOrder( groupField, value, fields ) ){
+							group.push( groupField );
+
+							// Delete them from current values
+							delete value[ groupField ];
+						}
+					});
+					if( group.length )
+						order.push( group );
+				}
+				else if( me.addFieldToOrder( field, value, fields ) ){
+					order.push( field );
 
 					// Delete them from current values
-					delete value[ name ];
+					delete value[ field ];
 				}
 			});
 		}
@@ -145,6 +179,16 @@ var ObjectField = React.createClass({
 		}
 
 		return order;
+	},
+
+	/**
+	 * Checks when a field that appears in the sort settings needs to be added to
+	 * the fieldOrder array
+	 *
+	 * @param {String} field The field name
+	 */
+	addFieldToOrder: function( field, value, fields ){
+		return typeof value[ field ] != 'undefined' || fields[ field ] && fields[ field ].type == 'react';
 	}
 });
 
