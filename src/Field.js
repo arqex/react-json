@@ -28,9 +28,14 @@ var Field = React.createClass({
 			className = 'jsonField',
 			type = definition.type || TypeField.prototype.guessType( this.props.value ),
 			id = this.props.id + '_' + this.props.name,
-			typeField = this.renderTypeField( type, id ),
-			error = ''
+			error = '',
+			typeField
 		;
+
+		if( type == 'react' )
+			return this.renderReactField( definition );
+
+		typeField = this.renderTypeField( type, id );
 
 		className += ' ' + type + 'Field';
 
@@ -79,6 +84,10 @@ var Field = React.createClass({
 			parentSettings: this.props.parentSettings
 		});
 		return component;
+	},
+
+	renderReactField: function( definition ){
+		return React.DOM.div( { className: 'jsonField reactField' }, definition.output );
 	},
 
 	handleRemove: function( e ){

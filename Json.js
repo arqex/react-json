@@ -150,6 +150,6 @@ Json.registerType( 'string', StringField, true );
 Json.registerType( 'text', TextField, true );
 Json.registerType( 'number', NumberField, true );
 Json.registerType( 'boolean', BooleanField, true );
-Json.registerType( 'password', PasswordField, true );
+Json.registerType( 'password', PasswordField );
 
 module.exports = Json;

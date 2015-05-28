@@ -112,7 +112,8 @@ var ObjectField = React.createClass({
 
 	getFieldOrder: function(){
 		var settingsOrder = this.props.settings.order,
-			orderType = typeof settingsOrder
+			orderType = typeof settingsOrder,
+			fields = this.props.settings.fields || {}
 		;
 
 		if( !settingsOrder || (orderType != 'function' && settingsOrder.constructor !== Array) )
@@ -128,7 +129,7 @@ var ObjectField = React.createClass({
 		// Add fields in the array
 		if( settingsOrder.constructor === Array ){
 			settingsOrder.forEach( function( name ){
-				if( typeof value[ name ] != 'undefined' ){
+				if( typeof value[ name ] != 'undefined' || fields[ name ] && fields[ name ].type == 'react' ){
 					order.push( name );
 
 					// Delete them from current values
