@@ -20,8 +20,8 @@ Setting key | Values | Description
 ---|---|---
 editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
-``
-*Values with \* are the default ones.*
+
+*Values with * are the default ones.*
 
 ## number
 A `number` type will use an HTML `input[type=number]` element to edit the field. It is the default type for js number values.
@@ -30,8 +30,8 @@ Setting key | Values | Description
 ---|---|---
 editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
-``
-*Values with \* are the default ones.*
+
+*Values with * are the default ones.*
 
 ## boolean
 A `boolean` type will use an HTML `input[type=checkbox]` element to edit the field. It is the default type for js boolean values.
@@ -46,7 +46,7 @@ Setting key | Values | Description
 editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
 
-*Values with \* are the default ones.*
+*Values with * are the default ones.*
 
 ## text
 A `text` type will use an HTML `textarea` element to edit the field. It is the default type for string longer than 100 characters.
@@ -56,7 +56,7 @@ Setting key | Values | Description
 editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
 
-*Values with \* are the default ones
+*Values with * are the default ones
 
 ## select
 A `select` type will use an HTML `select` element to edit the field.
@@ -65,7 +65,7 @@ Setting key | Values | Description
 ---|---|---
 options | *array[Options]* | The different options that can have the select box. Every option can be an object with `value` and `label` properties to define the options as `<option value={ value }>{ label }</option>`, or a `string` to set option's value and label with the `string`'s value.
 
-*Values with \* are the default ones.*
+*Values with * are the default ones.*
 
 ## object
 An `object` type will generate all the HTML needed to edit js objects. This may be the most important field type, as a JSON document is nothing but a js object.
@@ -78,7 +78,7 @@ Setting key | Values | Description
 | header | *string*, *function* | Allows to customize the text in the header of an `object` that also would be used to show/hide the properties. If a function is given, it will be called with the current `object`'s value as argument, and must return the text used as header.
 | order | *array*, *function* | An `array` with field names to set the exact order you want the properties to appear. If a function is given, it will be called with the current `object`'s value as argument, and must return an array with the field order.
 This setting allows to create field groups and insert react fields.
-*Values with \* are the default ones.*
+*Values with * are the default ones.*
 
 ## array
 An `array` type will generate all the HTML needed to edit js arrays.
@@ -90,7 +90,7 @@ Setting key | Values | Description
 | fixedFields | false*, true, *array* | Whether it is possible to delete elements from the array. If an array with indexes is given, those elements won't be removable. This is a deep setting.
 | header | *string*, *function* | Allows to customize the text in the header of an `array` that also would be used to show/hide the elements. If a function is given, it will be called with the current `array`'s value as argument, and must return the text used as header.
 This setting allows to create field groups and insert react fields.
-*Values with \* are the default ones.*
+*Values with * are the default ones.*
 
 ## react
 The `react` field type allows to insert HTML in the middle of the editor. This type of fields are really useful to add help and explanation about the form's fields.
