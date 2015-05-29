@@ -133,7 +133,7 @@ var Field = React.createClass({
 		if( error ){
 			message = this.props.definition.errorMessage;
 			if( !message )
-				message = ( this.props.definition.title || this.props.name ) + ' value is not valid.';
+				message = ( this.props.definition.label || this.props.name ) + ' value is not valid.';
 
 			error.path = name;
 			error.message = message;
