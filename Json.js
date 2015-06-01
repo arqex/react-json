@@ -25,7 +25,8 @@ var Json = React.createClass({
 	getDefaultProps: function(){
 		return {
 			value: {},
-			errors: false
+			errors: false,
+			updating: false
 		};
 	},
 
@@ -51,6 +52,9 @@ var Json = React.createClass({
 
 		// Listen to changes
 		value.getListener().on('update', function( updated ){
+			if( me.state.updating )
+				return me.setState({ updating: false });
+
 			me.setState({value: updated});
 
 			if( me.state.errors )
@@ -69,7 +73,7 @@ var Json = React.createClass({
 
 	componentWillReceiveProps: function( newProps ){
 		if( !newProps.value.getListener ){
-			this.setState({value: this.state.value.reset( newProps.value )});
+			this.setState({updating: true, value: this.state.value.reset( newProps.value )});
 		}
 
 		this.setState( {defaults: this.createDefaults()} );
