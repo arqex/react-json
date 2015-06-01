@@ -66,7 +66,7 @@ var Field = React.createClass({
 	},
 
 	renderTypeField: function( type, id ){
-		var definition = this.props.definition || {},
+		var definition = this.props.definition,
 			settings = objectAssign( {}, definition.settings || {} ),
 			component
 		;
@@ -99,7 +99,12 @@ var Field = React.createClass({
 	},
 
 	onUpdated: function( value ){
-		this.props.onUpdated( this.props.name, value );
+		var definition = this.props.definition;
+		if( this.props.value !== value ){
+			this.props.onUpdated( this.props.name, value );
+			if( definition.onChange )
+				definition.onChange( value, this.props.value );
+		}
 	},
 
 	getValidationErrors: function( jsonValue ){

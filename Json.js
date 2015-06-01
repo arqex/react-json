@@ -55,6 +55,9 @@ var Json = React.createClass({
 
 			if( me.state.errors )
 				me.getValidationErrors();
+
+			if( me.props.onChange )
+				me.props.onChange( updated.toJS() );
 		});
 
 		return {

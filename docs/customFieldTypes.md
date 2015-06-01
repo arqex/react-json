@@ -44,7 +44,7 @@ React.render(
 Voilà, a react-json form that uses a custom field type!
 
 ## Updating the field value
-In order to update their value, all the field instances receive a callback in the prop `onUpdated`. Using that callback our, field type let the `Json` component know that the value has been updated, so it can update the value of the JSON object accordingly, and our type instance will receive the updated value through `this.props.value`.
+In order to update their value, all the field instances receive a callback in the prop `onUpdated`. Using that callback our, field type let the `Json` component know that the value has been updated, so it can update the value of the JSON object accordingly, and our type instance will receive the updated value through `this.props.value`. 
 
 Let's modify our custom field type to increment the value on click:
 ```js
@@ -58,7 +58,7 @@ var Counter = React.createClass({
 });
 ```
 
-We don't need anything else, because the `Json` instance will be re-rendered and our component too, with the updated `this.props.value`.
+We don't need anything else, because the `Json` instance will be re-rendered and our component too, with the updated `this.props.value`. All that auto-render magic happens thanks to [freezer-js](https://github.com/arqex/freezer), an immutable store that makes easy to update deep nested structures.
 
 ## Adding settings
 Custom field types can be configurable via settings. We are going to create a setting for the `counter` field type called `step` to demostrate how the field settings work.
