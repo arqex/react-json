@@ -41,7 +41,8 @@ var Field = React.createClass({
 
 		if( this.state.error ){
 			className += ' jsonError';
-			error = React.DOM.span({ key:'e', className: 'jsonErrorMsg' }, this.state.error );
+			if( this.state.error !== true )
+				error = React.DOM.span({ key:'e', className: 'jsonErrorMsg' }, this.state.error );
 		}
 
 		var jsonName = [ React.DOM.label({ key: 's1', htmlFor: id }, (definition.title || this.props.name) + ':' ) ];
@@ -55,12 +56,8 @@ var Field = React.createClass({
 		}
 
 		return React.DOM.div({className: className}, [
-			React.DOM.span( {className: 'jsonName', key: 'n'}, [
-				jsonName
-			]),
-			React.DOM.span( {className: 'jsonValue', key: 'v'}, [
-				React.DOM.span({key:'s2'}, typeField )
-			]),
+			React.DOM.span( {className: 'jsonName', key: 'n'}, jsonName ),
+			React.DOM.span( {className: 'jsonValue', key: 'v'}, typeField ),
 			error
 		]);
 	},
@@ -125,6 +122,9 @@ var Field = React.createClass({
 				else
 					error.path = name + '.' + error.path;
 			});
+
+			if( childErrors.length )
+				this.setState( {error: true} );
 		}
 
 		if( !validates )

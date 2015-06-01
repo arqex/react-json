@@ -4,17 +4,16 @@
 	display: block;
 	position: relative;
 	font-style: normal;
+	text-align: left;
 }
 
-.jsonName a {
-	position: absolute;
-	left: 0;
-	right: 0;
+.jsonName a, .jsonFixed {
 	width: 10px;
 	margin: 0;
+	display: inline-block;
 }
 
-.jsonName span {
+.jsonValue {
 	margin-left: 10px;
 }
 

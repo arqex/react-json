@@ -88,9 +88,9 @@ pre {
 	display: block;
 }
 
-.jsonError > .jsonValue input,
-.jsonError > .jsonValue select,
-.jsonError > .jsonValue textarea {
+.jsonError > .jsonValue > input,
+.jsonError > .jsonValue > select,
+.jsonError > .jsonValue > textarea {
 	background-color: #fff8f8;
 }
 
