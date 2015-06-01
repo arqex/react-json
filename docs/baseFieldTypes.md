@@ -18,7 +18,7 @@ A `string` type will use an HTML `input[type=text]` element to edit the field. I
 
 Setting key | Values | Description
 ---|---|---
-editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
+editing | false*, true, `'always'` | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If `'always'`, it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
 
 *Values with * are the default ones.*
@@ -28,7 +28,7 @@ A `number` type will use an HTML `input[type=number]` element to edit the field.
 
 Setting key | Values | Description
 ---|---|---
-editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
+editing | false*, true, `'always'` | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If `'always'`, it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
 
 *Values with * are the default ones.*
@@ -43,7 +43,7 @@ A `password` type will use an HTML `input[type=password]` element to edit the fi
 
 Setting key | Values | Description
 ---|---|---
-editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
+editing | false*, true, `'always'` | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If `'always'`, it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
 
 *Values with * are the default ones.*
@@ -53,7 +53,7 @@ A `text` type will use an HTML `textarea` element to edit the field. It is the d
 
 Setting key | Values | Description
 ---|---|---
-editing | false*, true, 'always' | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If 'always', it will always show the input. This is a deep setting.
+editing | false*, true, `'always'` | The initial editing state. If false you need to click on the value to edit. If true, the field will start showing the input. If `'always'`, it will always show the input. This is a deep setting.
 placeholder | *string* | A placeholder for the input if there is no value for the field.
 
 *Values with * are the default ones
@@ -72,9 +72,9 @@ An `object` type will generate all the HTML needed to edit js objects. This may 
 
 Setting key | Values | Description
 ---|---|---
-| adder | true*, false, *string* | Whether to show a link at the bottom of the object to let the user add new properties. If a `string` is given it will shown instead of the default *+ Add field* message. This is a deep setting.
-| editing | false*, true, 'always' | The initial editing state. If false you need to open the object contents. If true, the object properties will be visible initially. If 'always', it will always show the inner properties. This is a deep setting.
-| fixedFields | false*, true, *array* | Whether it is possible to delete properties from the object. If an array with field names is given, those properties won't be removable. This is a deep setting.
+| adder | true\*, false, *string* | Whether to show a link at the bottom of the object to let the user add new properties. If a `string` is given it will shown instead of the default *+ Add field* message. This is a deep setting.
+| editing | false*, true, `'always'` | The initial editing state. If false you need to open the object contents. If true, the object properties will be visible initially. If `'always'`, it will always show the inner properties. This is a deep setting.
+| fixedFields | false\*, true, *array* | Whether it is possible to delete properties from the object. If an array with field names is given, those properties won't be removable. This is a deep setting.
 | header | *string*, *function* | Allows to customize the text in the header of an `object` that also would be used to show/hide the properties. If a function is given, it will be called with the current `object`'s value as argument, and must return the text used as header.
 | order | *array*, *function* | An `array` with field names to set the exact order you want the properties to appear. If a function is given, it will be called with the current `object`'s value as argument, and must return an array with the field order.
 This setting allows to create field groups and insert react fields.
@@ -85,9 +85,9 @@ An `array` type will generate all the HTML needed to edit js arrays.
 
 Setting key | Values | Description
 ---|---|---
-| adder | true*, false, *string* | Whether to show a link at the bottom of the array to let the user add new elements. If a `string` is given it will shown instead of the default *+ Add element* message. This is a deep setting.
-| editing | false*, true, 'always' | The initial editing state. If false you need to open the array contents. If true, the array elements will be visible initially. If 'always', it will always show the inner elements. This is a deep setting.
-| fixedFields | false*, true, *array* | Whether it is possible to delete elements from the array. If an array with indexes is given, those elements won't be removable. This is a deep setting.
+| adder | true\*, false, *string* | Whether to show a link at the bottom of the array to let the user add new elements. If a `string` is given it will shown instead of the default *+ Add element* message. This is a deep setting.
+| editing | false*, true, `'always'` | The initial editing state. If false you need to open the array contents. If true, the array elements will be visible initially. If `'always'`, it will always show the inner elements. This is a deep setting.
+| fixedFields | false\*, true, *array* | Whether it is possible to delete elements from the array. If an array with indexes is given, those elements won't be removable. This is a deep setting.
 | header | *string*, *function* | Allows to customize the text in the header of an `array` that also would be used to show/hide the elements. If a function is given, it will be called with the current `array`'s value as argument, and must return the text used as header.
 This setting allows to create field groups and insert react fields.
 *Values with * are the default ones.*

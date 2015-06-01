@@ -3,7 +3,13 @@ A JSON editor packed as a React.js component, but also the simplest way of creat
 
 [Play safe with react-json forms in the playground](http://codepen.io/arqex/pen/rVWYgo?editors=001).
 
-## A JSON editor
+React-json is like having an special input type for JSON objects, developers only need to listen to changes in the JSON instead of writing all the boilerplate needed to handle every single input of the form. It comes with top features:
+* Field type guessing for quick forms
+* Validation
+* Styles easily customizable
+* Extensible with custom field types
+
+## Examples
 Do you want to edit some JSON in your app? Pass it to the Json component:
 ```js
 var doc = {
@@ -12,9 +18,13 @@ var doc = {
 };
 
 React.render(
-  <Json value={ doc } />,
+  <Json value={ doc } onChange={ logChange } />,
   document.body
 );
+
+function logChange( value ){
+   console.log( value );
+}
 ```
 [See this example working](http://codepen.io/arqex/pen/rVWYgo?editors=001)
 
@@ -42,37 +52,8 @@ React.render(
 ```
 [See this form working](http://codepen.io/arqex/pen/xGRpOx?editors=011)
 
-## Interactive forms
-Hey! It's really easy creating forms, but it would be great if I can get the value of the form, you know, just for using it...
+## Docs
+React JSON is highly configurable, have a look at the docs to discover how.
 
-react-json doesn't come with buttons, but you can know its value at any time just creating a reference to it in your components:
-```js
-var doc = {
-  user: "",
-  password: ""
-};
-
-var settings = {
-  form: true,
-  fields: { password: {type: 'password'} }
-};
-
-var Form = React.createClass({
-  render: function(){
-    return (
-        <form>
-        <Json value={ doc } settings={ settings } ref="json" />
-        <button onClick={ this.onOk }>Ok</button>
-      </form>
-    );
-  },
-  onOk: function( e ){
-    e.preventDefault();
-    var val = this.refs.json.getValue();
-    alert('SPOILER: Your password is ' + val.password );
-  } 
-});
-
-React.render( <Form />,  document.body );
-```
-[Get the value of the form. Live!](http://codepen.io/arqex/pen/bdBYrB?editors=011)
+## MIT licensed
+[License here](LICENSE)

@@ -59,6 +59,43 @@ var settings = {
 };
 
 var Form = React.createClass({
+  getInitialState: function(){
+    return {value: doc};
+  },
+  render: function(){
+    return (
+      <form>
+        <Json value={ this.state.value } settings={ settings } onChange={ this.updateValue } />
+        <button onClick={ this.onOk }>Ok</button>
+      </form>
+    );
+  },
+  onOk: function( e ){
+    e.preventDefault();
+    alert('SPOILER: Your password is ' + this.state.value.password );
+  },
+  updateValue: function( nextValue ) {
+    this.setState( {value: nextValue} );
+  }
+});
+
+React.render( <Form />,  document.body );
+```
+[Get the value of the form. Live!](http://codepen.io/arqex/pen/ZGLwWz?editors=011)
+
+There is an alternative way of getting the value of a react-json component anytime we need it, and not only when it is updated. Using react references with the react-json component, we can access to the value of the JSON object thanks to the method `getValue` that is available in the react-json instance:
+```js
+var doc = {
+  user: "",
+  password: ""
+};
+
+var settings = {
+  form: true,
+  fields: { password: {type: 'password'} }
+};
+
+var Form = React.createClass({
   render: function(){
     return (
         <form>
@@ -76,4 +113,4 @@ var Form = React.createClass({
 
 React.render( <Form />,  document.body );
 ```
-[Get the value of the form. Live!](http://codepen.io/arqex/pen/bdBYrB?editors=011)
+http://codepen.io/arqex/pen/bdBYrB?editors=011
