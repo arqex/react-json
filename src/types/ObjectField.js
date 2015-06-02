@@ -36,6 +36,7 @@ var ObjectField = React.createClass({
 			attrs = [],
 			value = assign({}, this.props.value ),
 			fixedFields = this.getFixedFields(),
+			hidden = this.getHiddenFields(),
 			groupCount = 0,
 			definition
 		;
@@ -44,7 +45,7 @@ var ObjectField = React.createClass({
 			// If the field is an array handle grouping
 			if( field.constructor === Array )
 				attrs.push( me.renderGroup( field, fixedFields, ++groupCount ) );
-			else
+			else if( !hidden[ field ] )
 				attrs.push( me.renderField( field, fixedFields ) );
 		});
 
@@ -189,6 +190,20 @@ var ObjectField = React.createClass({
 	 */
 	addFieldToOrder: function( field, value, fields ){
 		return typeof value[ field ] != 'undefined' || fields[ field ] && fields[ field ].type == 'react';
+	},
+
+	getHiddenFields: function(){
+		var hidden = this.props.settings.hiddenFields,
+			fields = {}
+		;
+		if( !hidden )
+			return fields;
+
+		hidden.forEach( function( f ){
+			fields[ f ] = 1;
+		});
+
+		return fields;
 	}
 });
 

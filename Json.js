@@ -89,6 +89,7 @@ var Json = React.createClass({
 					editing: this.getFormSetting( settings, 'editing', 'always'),
 					fixedFields: this.getFormSetting( settings, 'fixedFields', true),
 					adder:  this.getFormSetting( settings, 'adder', false),
+					hiddenFields: settings.hiddenFields,
 					header: false,
 					order: settings.order
 				}),

@@ -75,6 +75,7 @@ Setting key | Values | Description
 | adder | true\*, false, *string* | Whether to show a link at the bottom of the object to let the user add new properties. If a `string` is given it will shown instead of the default *+ Add field* message. This is a deep setting.
 | editing | false*, true, `'always'` | The initial editing state. If false you need to open the object contents. If true, the object properties will be visible initially. If `'always'`, it will always show the inner properties. This is a deep setting.
 | fixedFields | false\*, true, *array* | Whether it is possible to delete properties from the object. If an array with field names is given, those properties won't be removable. This is a deep setting.
+| hiddenFields | *array* | A list of fields that won't be shown to the user to be edited.
 | header | *string*, *function* | Allows to customize the text in the header of an `object` that also would be used to show/hide the properties. If a function is given, it will be called with the current `object`'s value as argument, and must return the text used as header.
 | order | *array*, *function* | An `array` with field names to set the exact order you want the properties to appear. If a function is given, it will be called with the current `object`'s value as argument, and must return an array with the field order.
 This setting allows to create field groups and insert react fields.
