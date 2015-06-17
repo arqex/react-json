@@ -13,6 +13,17 @@ var React = require('react'),
 	deepSettings = require('./src/deepSettings')
 ;
 
+// Detect flexbox support
+var flexboxClass = typeof document != 'undefined' || '',
+	css
+;
+if( flexboxClass ){
+	css = document.documentElement.style;
+	if( ('flexWrap' in css) || ('webkitFlexWrap' in css) || ('msFlexWrap' in css) )
+		flexboxClass = ' jsonFlex';
+}
+
+
 
 /**
  * The main component. It will refresh the props when the store changes.
@@ -96,10 +107,11 @@ var Json = React.createClass({
 				ref: 'value',
 				defaults: this.state.defaults,
 				id: this.state.id
-			})
+			}),
+			className = 'jsonEditor' + flexboxClass
 		;
 
-		return React.DOM.div({className: "jsonEditor"}, ob);
+		return React.DOM.div({ className: className }, ob);
 	},
 
 	getValue: function(){

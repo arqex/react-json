@@ -4,14 +4,44 @@
 	vertical-align: top;
 }
 
+.jsonEditor > .jsonObject > .jsonChildren {
+	margin-left: 0;
+	border-left: 0;
+	padding: 0;
+}
+
 .jsonChildren {
   margin-left: 20px;
   display: none;
   font-weight: normal;
   border-left: 1px dotted #ddd;
 }
+.jsonFlex .jsonChildren {
+	margin-left: -20px;
+}
 .jsonCompound.open > .jsonChildren {
   display: block;
+}
+
+.jsonAdd {
+	margin-left: 5px;
+}
+.jsonFlex .jsonField {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-webkit-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	flex-wrap: nowrap;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	-webkit-align-content: stretch;
+	-ms-flex-line-pack: stretch;
+	align-content: stretch;
 }
 .jsonFieldAdder {
   margin-left: 13px;
@@ -32,10 +62,14 @@
 .jsonName {
   font-style: italic;
   text-align: right;
+  position: relative;
+  padding-left: 15px;
+  white-space: nowrap;
 }
 
 .jsonValue {
-  margin-left: 5px;
+  padding-left: 5px;
+  flex-grow: 1;
 }
 
 .jsonValue > input,
@@ -44,12 +78,21 @@
 	margin-bottom: 5px;
 }
 
+.jsonFlex input[type=text],
+.jsonFlex input[type=number],
+.jsonFlex input[type=password],
+.jsonFlex textarea {
+	width: 100%;
+}
+
 .jsonRemove, .jsonFixed {
   visibility: hidden;
   margin-right: 5px;
   text-decoration: none;
   width: .6em;
   display: inline-block;
+  position: absolute;
+  left: 0;
 }
 
 .jsonName:hover > .jsonRemove {

@@ -1,5 +1,7 @@
 /* Create a block desing instead the default inline one for json editor */
-
+.jsonField {
+	display: block !important;
+}
 .jsonName {
 	display: block;
 	position: relative;
@@ -17,14 +19,14 @@
 	margin-left: 10px;
 }
 
-.objectProperty > .jsonValue,
-.objectProperty > .jsonName,
-.arrayProperty > .jsonValue,
-.arrayProperty > .jsonName {
+.objectField > .jsonValue,
+.objectField > .jsonName,
+.arrayField > .jsonValue,
+.arrayField > .jsonName {
 	display: inline;
 }
 
-.jsonChildren {
+.jsonEditor .jsonChildren {
 	margin-left: 10px;
 	padding-left: 10px;
 }
