@@ -68,5 +68,38 @@ var ReactSelectWrapper = React.createClass({
 
 And that's all folks! You already have a 'react-select' field to use inside your react-json forms. [See it working](http://codepen.io/arqex/pen/NqprXx?editors=001).
 
-## react-datepicker
-There is a JS type that is not supported by react-json out-of-the box. But there are lots of datepickers available for react that we can use. In the example we are going to create a wrapper for [react-datepicker](https://github.com/Hacker0x01/react-datepicker). This time we want it to be selectable when we are adding a new item to an object or an array
+## react-datetime
+There is a JS type that is not supported by react-json out-of-the box: `Date` objects. There are lots of datepickers available for react that we can use and they would look great inside react-json. In the example we are going to create a wrapper for [react-datetime](https://github.com/arqex/react-datetime). It can edit dates and times at once, so it is perfect to edit `Date` objects.
+
+This time we want it to be selectable when we are adding a new item to an object or an array. To do so we need to add `true` as the third argument when registering:
+```js
+Json.registerType( 'date', DatetimeWrapper, true );
+```
+
+The wrapper will be really similar to the react-select one. We can create it just adapting it to react-datetime:
+```js
+var ReactSelectWrapper = React.createClass({
+    render: function(){
+        // Use ES6 `Object.assign` to clone the settings
+        var props = Object.assign({}, this.props.settings);
+        
+        // The value is going to the date prop
+        props.date = this.props.value;
+        props.onChange = this.updateValue;
+        
+        return React.createElement( Datetime, props );
+    },
+    updateValue: function( newValue ){
+        // react-datetime returns a moment.js object
+        // convert it to a date
+        this.props.onUpdated( newValue.toDate() );
+    },
+
+    isType: function( value ){
+        return value && value.constructor === Date;
+    }
+});
+```
+
+Hey, that method `isType` is new! In our case we want the brand new `date` field type to be the default one for `Date` objects. When we use have a json object with a `Date` inside it will be edited automatically using react-datetime.
+

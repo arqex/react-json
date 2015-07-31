@@ -23,7 +23,7 @@ if( flexboxClass ){
 		flexboxClass = ' jsonFlex';
 }
 
-
+var noop = function(){};
 
 /**
  * The main component. It will refresh the props when the store changes.
@@ -35,9 +35,11 @@ var Json = React.createClass({
 
 	getDefaultProps: function(){
 		return {
-			value: {},
+			value: false,
+			defaultValue: {},
 			errors: false,
-			updating: false
+			updating: false,
+			onChange: noop
 		};
 	},
 
@@ -53,7 +55,7 @@ var Json = React.createClass({
 
 	getInitialState: function(){
 		var me = this,
-			value = this.props.value,
+			value = this.props.value || this.props.defaultValue,
 			listener
 		;
 
@@ -80,6 +82,56 @@ var Json = React.createClass({
 			defaults: this.createDefaults(),
 			id: this.getId()
 		};
+	},
+
+	getStateFromProps: function(){
+		var me = this,
+			value = this.props.value,
+			listener
+		;
+
+		if( !value )
+
+		// If it is a freezer node
+		if( !value.getListener )
+			value = new Freezer( value ).get();
+
+		// Listen to changes
+		value.getListener().on('update', function( updated ){
+			if( me.state.updating )
+				return me.setState({ updating: false });
+
+			// Only update on uncontrolled mode
+			if( !me.props.value )
+				me.setState({ value: updated });
+
+			if( me.state.errors )
+				me.getValidationErrors();
+
+			me.props.onChange( updated.toJS() );
+		});
+
+		return {
+			value: value,
+			defaults: this.createDefaults(),
+			id: this.getId()
+		};
+	},
+
+	updateListener: function( updated ){
+		var me = this;
+
+		if( me.state.updating )
+			return me.setState({ updating: false });
+
+		// Only update on uncontrolled mode
+		if( !me.props.value )
+			me.setState({ value: updated });
+
+		if( me.state.errors )
+			me.getValidationErrors();
+
+		me.props.onChange( updated.toJS() );
 	},
 
 	componentWillReceiveProps: function( newProps ){
