@@ -39,24 +39,19 @@ module.exports = {
 	},
 
 	componentWillReceiveProps: function( nextProps ){
-		var nextState = {},
-			update = false
-		;
+		var nextState = {};
 
-		if( this.props.value != nextProps.value ){
-			update = true;
-			nextState.value = nextProps.value;
-		}
+		nextState.value = nextProps.value;
+
 		if( this.props.settings.editing != nextProps.settings.editing ){
-			update = true;
 			nextState.editing = nextProps.editing;
 		}
-		if( update )
-			this.setState( nextState );
+
+		this.setState( nextState );
 	},
 
 	componentDidUpdate: function( prevProps, prevState ){
-		if( this.state.editing && ! prevState.editing || this.props.settings.focus ){
+		if( this.state.editing && (!prevState.editing || this.props.settings.focus) ){
 			this.focus();
 		}
 	},
@@ -72,7 +67,7 @@ module.exports = {
 
 	setValue: function(){
 		if( this.state.editing != 'always' )
-			this.setState({editing: false});
+			this.setState({editing: false, value: this.props.value});
 		this.props.onUpdated( this.state.value );
 	},
 

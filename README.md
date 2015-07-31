@@ -52,6 +52,15 @@ React.render(
 ```
 [See this form working](http://codepen.io/arqex/pen/xGRpOx?editors=011)
 
+## Props
+
+| Name         | Type    | Default | Description |
+| ------------ | ------- | ------- | ----------- |
+| **value** | Object | none | Represents the JSON object to edit, in order to use react-json as a [controlled component](https://facebook.github.io/react/docs/forms.html#controlled-components).|
+| **defaultValue** | Object | `{}` | Represents the JSON object to edit, in order to use react-json as a [uncontrolled component](https://facebook.github.io/react/docs/forms.html#uncontrolled-components).|
+| **onChange** | function | `fn(){}` | Callback trigger when the JSON object is updated.|
+| **settings** | Object | `{}` | Fine grained customization for the component. [See the settings documentation](docs/settings.md).|
+
 ## Docs
 React JSON is highly configurable, have a look at the docs to discover how.
 

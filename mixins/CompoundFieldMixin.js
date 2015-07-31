@@ -92,7 +92,10 @@ module.exports = {
 		var fields = this.state.fields;
 		if( fields[ key ] && fields[ key ].settings.focus === true ){
 			fields = assign({}, fields);
-			fields[key].settings.focus = false;
+			var settings = fields[key].settings;
+			settings.focus = false;
+			if( settings.editing != 'always' )
+				settings.editing = false;
 			this.setState( {fields: fields} );
 		}
 	},
