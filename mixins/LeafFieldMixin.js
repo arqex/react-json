@@ -86,11 +86,10 @@ module.exports = {
 	},
 
 	focus: function(){
-		/*
 		var node = this.refs.input;
-		node.focus();
-		*/
-		this.focus()
-		//node.value = node.value;
+		if (node) { // avoid firing when there is no input
+			node.focus();
+			node.value = node.value;
+		}
 	}
 };
