@@ -86,7 +86,7 @@ module.exports = {
 	},
 
 	focus: function(){
-		var node = this.refs.input.getDOMNode();
+		var node = this.refs.input;
 		node.focus();
 		node.value = node.value;
 	}
