@@ -86,8 +86,11 @@ module.exports = {
 	},
 
 	focus: function(){
+		/*
 		var node = this.refs.input;
 		node.focus();
-		node.value = node.value;
+		*/
+		this.focus()
+		//node.value = node.value;
 	}
 };
