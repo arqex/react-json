@@ -13,6 +13,8 @@ React-json comes with a nice set of field types to let us edit JSON data using t
 
 To use them, just define them [using the fields setting](fieldTypes.md).
 
+Field settings shown in this page should be added in a `settings` object at the same level than the `type` attribute in the definition object.
+
 ## string
 A `string` type will use an HTML `input[type=text]` element to edit the field. It is the default type for js strings shorter than 100 characters.
 
