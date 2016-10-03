@@ -86,8 +86,10 @@ module.exports = {
 	},
 
 	focus: function(){
-		var node = this.refs.input.getDOMNode();
-		node.focus();
-		node.value = node.value;
+		var node = this.refs.input;
+		if (node) { // avoid firing when there is no input
+			node.focus();
+			node.value = node.value;
+		}
 	}
 };

@@ -50,9 +50,9 @@ var FieldAdder = React.createClass({
 	componentDidUpdate: function( prevProps, prevState ){
 		if( !prevState.creating && this.state.creating ){
 			if( this.refs.keyInput )
-				this.refs.keyInput.getDOMNode().focus();
+				this.refs.keyInput.focus();
 			else
-				this.refs.typeSelector.getDOMNode().focus();
+				this.refs.typeSelector.focus();
 		}
 	},
 

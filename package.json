@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "gulp": "^3.8.11",
+    "gulp-insert": "^0.5.0",
     "gulp-uglify": "^1.2.0",
     "gulp-webpack": "^1.4.0",
     "jsdom": "^3.1.2",
