@@ -5,7 +5,7 @@ DOM();
 var React = require('react'),
 	ReactAddons    = require('react/addons'),
 	Utils = React.addons.TestUtils,
-	StringProperty = require('../types/StringProperty.jsx'),
+	StringProperty = require('../src/types/StringField'),
 	assert = require('assert')
 ;
 
