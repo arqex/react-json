@@ -1,5 +1,5 @@
 /*
-react-json v0.1.0
+react-json v0.2.0
 https://github.com/arqex/react-json
 MIT: https://github.com/arqex/react-json/raw/master/LICENSE
 */
