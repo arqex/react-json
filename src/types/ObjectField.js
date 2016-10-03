@@ -43,10 +43,12 @@ var ObjectField = React.createClass({
 
 		this.getFieldOrder().forEach( function( field ){
 			// If the field is an array handle grouping
-			if( field.constructor === Array )
+			if( field.constructor === Array ) {
 				attrs.push( me.renderGroup( field, fixedFields, ++groupCount ) );
-			else if( !hidden[ field ] )
+			}
+			else if( !hidden[ field ] ) {
 				attrs.push( me.renderField( field, fixedFields ) );
+			}
 		});
 
 		var openHashChildren = [ attrs ];
