@@ -39,7 +39,7 @@ var SelectType = React.createClass({
 				data = { value: opt, label: opt };
 
 			options.push(
-				React.DOM.option({value: data.value}, data.label)
+				React.DOM.option({value: data.value, key: data.value}, data.label)
 			);
 		});
 
