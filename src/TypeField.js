@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react'),
+ReactDOM = require('react-dom'),
 	deepSettings = require('./deepSettings'),
 	objectAssign = require('object-assign'),
 	createClass = require('create-react-class'),

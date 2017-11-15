@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react'),
+ReactDOM = require('react-dom'),
 	Field = require('../Field'),
 	assign = require('object-assign'),
 	CompoundFieldMixin = require('../../mixins/CompoundFieldMixin'),
@@ -57,8 +58,8 @@ var ObjectField = createClass({
 			openHashChildren.push( this.renderAdder() );
 		}
 
-		openHash = React.DOM.div({ key: 'o', className: 'jsonChildren'}, openHashChildren);
-		return React.DOM.span({className: className}, [
+		openHash = ReactDOM.div({ key: 'o', className: 'jsonChildren'}, openHashChildren);
+		return ReactDOM.span({className: className}, [
 			this.renderHeader(),
 			openHash
 		]);
@@ -96,7 +97,7 @@ var ObjectField = createClass({
 			fields.push( me.renderField( field, fixedFields ) );
 		});
 
-		return React.DOM.div({ className: 'jsonGroup jsonGroup_' + groupNumber }, fields );
+		return ReactDOM.div({ className: 'jsonGroup jsonGroup_' + groupNumber }, fields );
 	},
 
 	getDefaultHeader: function(){

@@ -1,4 +1,5 @@
 var React = require('react'),
+ReactDOM = require('react-dom'),
 	LeafMixin = require('../../mixins/LeafFieldMixin'),
 	createClass = require('create-react-class')
 ;
@@ -21,9 +22,9 @@ var TextField = createClass({
 		var className = 'jsonText';
 
 		if( !this.state.editing )
-			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
+			return ReactDOM.span( {onClick: this.setEditMode, className: className}, this.props.value );
 
-		return React.DOM.textarea({
+		return ReactDOM.textarea({
 			value: this.state.value,
 			id: this.props.id,
 			onChange: this.updateValue,

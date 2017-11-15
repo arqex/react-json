@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react'),
+ReactDOM = require('react-dom'),
 	Field = require('../Field'),
 	assign = require('object-assign'),
 	CompoundFieldMixin = require('../../mixins/CompoundFieldMixin'),
@@ -64,9 +65,9 @@ var ArrayField = createClass({
 			openArrayChildren.push( this.renderAdder( this.props.value.length ) );
 		}
 
-		openArray = React.DOM.div({ key:'o', className: 'jsonChildren' }, openArrayChildren );
+		openArray = ReactDOM.div({ key:'o', className: 'jsonChildren' }, openArrayChildren );
 
-		return React.DOM.span({className: className}, [
+		return ReactDOM.span({className: className}, [
 			this.renderHeader(),
 			openArray
 		]);

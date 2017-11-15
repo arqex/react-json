@@ -1,4 +1,5 @@
 var React = require('react'),
+ReactDOM = require('react-dom'),
 	TypeField = require('./TypeField'),
 	createClass = require('create-react-class')
 ;
@@ -20,31 +21,31 @@ var FieldAdder = createClass({
 
 	render: function(){
 		if( !this.state.creating )
-			return React.DOM.a({ className: 'jsonAdd', href: '#', onClick: this.handleCreate }, this.props.text );
+			return ReactDOM.a({ className: 'jsonAdd', href: '#', onClick: this.handleCreate }, this.props.text );
 
 		var options = this.getTypes().map( function( type ){
-				return React.DOM.option({value: type, key: type}, type[0].toUpperCase() + type.slice(1));
+				return ReactDOM.option({value: type, key: type}, type[0].toUpperCase() + type.slice(1));
 			}),
 			fieldName
 		;
 
 		if( typeof this.props.name != 'undefined' )
 			fieldName =  [
-				React.DOM.span({className: 'jsonName'}, this.props.name),
-				React.DOM.span(null, ':')
+				ReactDOM.span({className: 'jsonName'}, this.props.name),
+				ReactDOM.span(null, ':')
 			];
 		else {
 			fieldName = [
-				React.DOM.input({ref: 'keyInput', type: 'text', value: this.state.value, onChange: this.changeKey}),
-				React.DOM.span(null, ':')
+				ReactDOM.input({ref: 'keyInput', type: 'text', value: this.state.value, onChange: this.changeKey}),
+				ReactDOM.span(null, ':')
 			];
 		}
 
-		return React.DOM.div( {className: 'jsonField jsonFieldAdder'}, [
+		return ReactDOM.div( {className: 'jsonField jsonFieldAdder'}, [
 			fieldName,
-			React.DOM.select({ key: 's', value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
-			React.DOM.button({ key: 'b', onClick: this.createField }, 'OK' ),
-			React.DOM.a({ key: 'a', href: '#', className: 'cancelField', onClick: this.handleCancel}, 'Cancel')
+			ReactDOM.select({ key: 's', value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
+			ReactDOM.button({ key: 'b', onClick: this.createField }, 'OK' ),
+			ReactDOM.a({ key: 'a', href: '#', className: 'cancelField', onClick: this.handleCancel}, 'Cancel')
 		]);
 	},
 
