@@ -2,18 +2,20 @@
 
 var React = require('react'),
 	deepSettings = require('./deepSettings'),
-	objectAssign = require('object-assign')
+	objectAssign = require('object-assign'),
+	createClass = require('create-react-class'),
+	PropTypes = require('prop-types'),
 ;
 
 var components = {};
 var typeCheckOrder = [];
 
-var TypeField = React.createClass({
+var TypeField = createClass({
 	components: {},
 	typeCheckOrder: [],
 
 	contextTypes: {
-		typeDefaults: React.PropTypes.object
+		typeDefaults: PropTypes.object
 	},
 
 	render: function() {

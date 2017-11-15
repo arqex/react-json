@@ -3,7 +3,8 @@
 var React = require('react'),
 	objectAssign = require('object-assign'),
 	Validation = require('./validation'),
-	TypeField = require('./TypeField')
+	TypeField = require('./TypeField'),
+	createClass = require('create-react-class')
 ;
 
 /**
@@ -13,7 +14,7 @@ var React = require('react'),
  * @param {Mixed} original The value of the attibute in the original json to highlight the changes.
  * @param {FreezerNode} parent The parent node to notify attribute updates.
  */
-var Field = React.createClass({
+var Field = createClass({
 
 	getInitialState: function(){
 		return {error: false};
