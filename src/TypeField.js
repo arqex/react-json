@@ -4,7 +4,7 @@ var React = require('react'),
 	deepSettings = require('./deepSettings'),
 	objectAssign = require('object-assign'),
 	createClass = require('create-react-class'),
-	PropTypes = require('prop-types'),
+	PropTypes = require('prop-types')
 ;
 
 var components = {};
