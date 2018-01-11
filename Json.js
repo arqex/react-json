@@ -1,5 +1,4 @@
 var React = require('react'),
-ReactDOM = require('react-dom'),
 	Freezer = require('freezer-js'),
 	objectAssign = require('object-assign'),
 	TypeField = require('./src/TypeField'),
