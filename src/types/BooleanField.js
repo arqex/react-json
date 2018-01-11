@@ -1,5 +1,4 @@
 var React = require('react'),
-ReactDOM = require('react-dom'),
 	createClass = require('create-react-class');
 
 /**
@@ -13,7 +12,7 @@ var BooleanField = createClass({
 	render: function(){
 		var className = 'jsonBoolean';
 
-		return ReactDOM.input({
+		return React.createElement('input', {
 			type: "checkbox",
 			className: className,
 			id: this.props.id,

@@ -13,7 +13,7 @@ ReactDOM = require('react-dom'),
 	SelectField = require('./src/types/SelectField'),
 	deepSettings = require('./src/deepSettings'),
 		createClass = require('create-react-class'),
-			PropTypes = require('prop-types')	
+			PropTypes = require('prop-types')
 ;
 
 // Detect flexbox support
@@ -114,7 +114,7 @@ var Json = createClass({
 			className = 'jsonEditor' + flexboxClass
 		;
 
-		return ReactDOM.div({ className: className }, ob);
+		return React.createElement('div', { className: className }, ob);
 	},
 
 	getValue: function(){

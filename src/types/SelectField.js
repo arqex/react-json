@@ -1,5 +1,4 @@
 var React = require('react'),
-ReactDOM = require('react-dom'),
 	createClass = require('create-react-class');
 
 /**
@@ -19,7 +18,7 @@ var SelectType = createClass({
 	render: function(){
 		var className = 'jsonSelect';
 
-		return ReactDOM.select({
+		return React.createElement('select', {
 			className: className,
 			id: this.props.id,
 			value: this.props.value,
@@ -41,7 +40,7 @@ var SelectType = createClass({
 				data = { value: opt, label: opt };
 
 			options.push(
-				ReactDOM.option({value: data.value}, data.label)
+				React.createElement('option', {value: data.value}, data.label)
 			);
 		});
 

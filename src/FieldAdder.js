@@ -1,5 +1,4 @@
 var React = require('react'),
-ReactDOM = require('react-dom'),
 	TypeField = require('./TypeField'),
 	createClass = require('create-react-class')
 ;
@@ -21,31 +20,31 @@ var FieldAdder = createClass({
 
 	render: function(){
 		if( !this.state.creating )
-			return ReactDOM.a({ className: 'jsonAdd', href: '#', onClick: this.handleCreate }, this.props.text );
+			return React.createElement('a', { className: 'jsonAdd', href: '#', onClick: this.handleCreate }, this.props.text );
 
 		var options = this.getTypes().map( function( type ){
-				return ReactDOM.option({value: type, key: type}, type[0].toUpperCase() + type.slice(1));
+				return React.createElement('option', {value: type, key: type}, type[0].toUpperCase() + type.slice(1));
 			}),
 			fieldName
 		;
 
 		if( typeof this.props.name != 'undefined' )
 			fieldName =  [
-				ReactDOM.span({className: 'jsonName'}, this.props.name),
-				ReactDOM.span(null, ':')
+				React.createElement('span', {className: 'jsonName'}, this.props.name),
+				React.createElement('span', null, ':')
 			];
 		else {
 			fieldName = [
-				ReactDOM.input({ref: 'keyInput', type: 'text', value: this.state.value, onChange: this.changeKey}),
-				ReactDOM.span(null, ':')
+				React.createElement('input', {ref: 'keyInput', type: 'text', value: this.state.value, onChange: this.changeKey}),
+				React.createElement('span', null, ':')
 			];
 		}
 
-		return ReactDOM.div( {className: 'jsonField jsonFieldAdder'}, [
+		return React.createElement('div', {className: 'jsonField jsonFieldAdder'}, [
 			fieldName,
-			ReactDOM.select({ key: 's', value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
-			ReactDOM.button({ key: 'b', onClick: this.createField }, 'OK' ),
-			ReactDOM.a({ key: 'a', href: '#', className: 'cancelField', onClick: this.handleCancel}, 'Cancel')
+			React.createElement('select', { key: 's', value: this.state.type, onChange: this.changeType, ref: 'typeSelector'}, options),
+			React.createElement('button', { key: 'b', onClick: this.createField }, 'OK' ),
+			React.createElement('a', { key: 'a', href: '#', className: 'cancelField', onClick: this.handleCancel}, 'Cancel')
 		]);
 	},
 

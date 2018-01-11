@@ -14,9 +14,9 @@ module.exports = {
 		var className = this.typeClass;
 
 		if( !this.state.editing )
-			return React.DOM.span( {onClick: this.setEditMode, className: className}, this.getDisplayString() );
+			return React.createElement('span', {onClick: this.setEditMode, className: className}, this.getDisplayString() );
 
-		return React.DOM.input({
+		return React.createElement('input', {
 			type: this.inputType,
 			value: this.state.value,
 			id: this.props.id,
@@ -33,7 +33,7 @@ module.exports = {
 			return this.getDisplayModeString();
 
 		if( this.props.value === '' )
-			return React.DOM.span( {className: 'jsonNovalue'}, 'No value' );
+			return React.createElement('span', {className: 'jsonNovalue'}, 'No value' );
 
 		return this.props.value;
 	},

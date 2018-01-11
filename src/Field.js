@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react'),
-ReactDOM = require('react-dom'),
 	objectAssign = require('object-assign'),
 	Validation = require('./validation'),
 	TypeField = require('./TypeField'),
@@ -44,22 +43,22 @@ var Field = createClass({
 		if( this.state.error ){
 			className += ' jsonError';
 			if( this.state.error !== true )
-				error = ReactDOM.span({ key:'e', className: 'jsonErrorMsg' }, this.state.error );
+				error = React.createElement('span', { key:'e', className: 'jsonErrorMsg' }, this.state.error );
 		}
 
-		var jsonName = [ ReactDOM.label({ key: 's1', htmlFor: id }, (definition.title || this.props.name) + ':' ) ];
+		var jsonName = [ React.createElement('label', { key: 's1', htmlFor: id }, (definition.title || this.props.name) + ':' ) ];
 
 		if( this.props.fixed ){
 			// If the field cannot be removed, add a placeholder to maintain the design
-			jsonName.unshift( ReactDOM.span({ key:'f', className: 'jsonFixed' }) );
+			jsonName.unshift( React.createElement('span', { key:'f', className: 'jsonFixed' }) );
 		}
 		else{
-			jsonName.unshift( ReactDOM.a({ key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x') );
+			jsonName.unshift( React.createElement('a', { key:'a', href: '#', className: 'jsonRemove', onClick: this.handleRemove}, 'x') );
 		}
 
-		return ReactDOM.div({className: className}, [
-			ReactDOM.span( {className: 'jsonName', key: 'n'}, jsonName ),
-			ReactDOM.span( {className: 'jsonValue', key: 'v'}, typeField ),
+		return React.createElement('div', {className: className}, [
+			React.createElement('span', {className: 'jsonName', key: 'n'}, jsonName ),
+			React.createElement('span', {className: 'jsonValue', key: 'v'}, typeField ),
 			error
 		]);
 	},
@@ -86,7 +85,7 @@ var Field = createClass({
 	},
 
 	renderReactField: function( definition ){
-		return ReactDOM.div( { className: 'jsonField reactField' }, definition.output );
+		return React.createElement('div', { className: 'jsonField reactField' }, definition.output );
 	},
 
 	handleRemove: function( e ){

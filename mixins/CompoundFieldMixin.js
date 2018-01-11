@@ -25,7 +25,7 @@ module.exports = {
 			header = settingsHeader;
 		}
 
-		return React.DOM.span({ key: 's', onClick: this.toggleEditing, className: 'compoundToggle' }, header);
+		return React.createElement('span', { key: 's', onClick: this.toggleEditing, className: 'compoundToggle' }, header);
 	},
 
 	toggleEditing: function(){
